@@ -29,5 +29,9 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
                                           3) index.js
                                            create thia using -> touch app.js like this
 
-
+    8) Now work on Package.json file
+          1) for Import syntex : chanke in package.josn: -->  (in description) Type: "module'
+          2) for run server install nodemon (npm i -D nodemon)
+              in script --> "dev": "nodemon src/index.js"
+               so run server using : npm run dev
 
