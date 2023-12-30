@@ -4,7 +4,7 @@ yet finilaze Database, Data-Modeling, requare Software.
 Develop Step Day wise
 
 -----------Day:- 01 -------------------------
-1)create mail forder : Youtube_like_clone_Project
+1)create main forder : Youtube_like_clone_Project
 2)under above folder, create folder: Backebd
 3)backend folder open in VS Code
 in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me File
@@ -35,3 +35,39 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
               in script --> "dev": "nodemon src/index.js"
                so run server using : npm run dev
 
+     ----------------- DAY : 02 -------------------------------------
+
+    9) Set Folder in SRC Folder :
+                                1) create folder Controller
+                                2) create folder db
+                                3) create folder middlewares
+                                4) create folder models
+                                5) create folder routes
+                                6) create folder utils (file upload , mail statics process code likhe)
+
+    10) now instail Prittier -> for code -> clean and design ->  npm i -D prettier
+
+       10.1) create .Prettierrc filr in main folder :
+                                                      {
+                                                        "singleQuote": false,
+                                                        ..
+                                                        ..
+                                                        so on
+                                                      }
+       10.2) create .prettierignore : in which write file name where prittier not work
+            likr:   - .env
+            node_modules
+
+    11) now Connect with Database
+         11.1) MongoDB Atlas  i have account then -> go in db -> connect -> mongoDB Compass then copy url
+               and pest in .env : MONGODB_URL : pest here
+
+               before it instail .env: npm i dotenv
+
+         11.2) in src-> constants.js me set DB name
+                                            like DB_Name="Youtube"
+
+    12) install express & mogoose
+         npm i express, mongoose
+
+    13) now Write logics for Db connection in Src-> db-> dbConnection.js
