@@ -77,3 +77,7 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
 
     16) in Package.json : in script: dev change to run so .env, and all extension load
          check work or not : npm run dev
+
+    17) db successfull conecot ho gya hai but usse kisi port pe listion nhi kiye hai
+      to ab:
+            index.js me kre : connectionDB() prommise return krta hai: app.js use kr rhe to import kre index.js
