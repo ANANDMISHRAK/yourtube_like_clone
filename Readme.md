@@ -69,5 +69,11 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
 
     12) install express & mogoose
          npm i express, mongoose
+    13) congiggure dotenv in index.js
 
-    13) now Write logics for Db connection in Src-> db-> dbConnection.js
+    14) now Write logics for Db connection in Src-> dbConnection-> dbConnection.js
+        and export
+    15) import db in configgure or call in index.js
+
+    16) in Package.json : in script: dev change to run so .env, and all extension load
+         check work or not : npm run dev
