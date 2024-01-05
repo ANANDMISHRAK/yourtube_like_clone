@@ -81,3 +81,20 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
     17) db successfull conecot ho gya hai but usse kisi port pe listion nhi kiye hai
       to ab:
             index.js me kre : connectionDB() prommise return krta hai: app.js use kr rhe to import kre index.js
+
+---
+
+# Day-4
+
+### Today Agenda
+
+write middleware start in app.js cors, use
+Write the class sentex of Responce send Error send
+
+    18 ) in app.js
+              18.1) install cors -> for kaha kaha se es backend pe request aa skta hai
+              18.2) .use(express.json())-> json , json form se data aa skta hai backed me
+              18.3) .use(express.urlencoded())--> url se data aa skta hai
+              18.4) .use(express.static("folder name))->>> koe static folder ko kahai hai
+              18.5) .use(cookieParser())-> cookie send krne ke liye
+
