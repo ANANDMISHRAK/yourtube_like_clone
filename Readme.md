@@ -4,6 +4,9 @@ yet finilaze Database, Data-Modeling, requare Software.
 Develop Step Day wise
 
 -----------Day:- 01 -------------------------
+
+# Day-01
+
 1)create main forder : Youtube_like_clone_Project
 2)under above folder, create folder: Backebd
 3)backend folder open in VS Code
@@ -35,7 +38,9 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
               in script --> "dev": "nodemon src/index.js"
                so run server using : npm run dev
 
-     ----------------- DAY : 02 -------------------------------------
+     --------------------- -------------------------------------
+
+# Day-2
 
     9) Set Folder in SRC Folder :
                                 1) create folder Controller
@@ -84,7 +89,7 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
 
 ---
 
-# Day-4
+# Day-3
 
 ### Today Agenda
 
@@ -100,3 +105,7 @@ Write the class sentex of Responce send Error send
 
      19) in src-> utils-> asyncHandler.js
          for formet to resulbe function -> baar baar DB connection ke liye
+
+     20) write class for error return syntex
+        in src-> utils-> ApiError.js
+          write class and constecter
