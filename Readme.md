@@ -109,3 +109,6 @@ Write the class sentex of Responce send Error send
      20) write class for error return syntex
         in src-> utils-> ApiError.js
           write class and constecter
+
+     21) write the syntex for Api Response
+         in srx-> utils-> ApiResponse.js
