@@ -91,10 +91,12 @@ in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me
 write middleware start in app.js cors, use
 Write the class sentex of Responce send Error send
 
-    18 ) in app.js
+    18 ) in app.js ---> npm i cookie-parser, cors
               18.1) install cors -> for kaha kaha se es backend pe request aa skta hai
               18.2) .use(express.json())-> json , json form se data aa skta hai backed me
               18.3) .use(express.urlencoded())--> url se data aa skta hai
               18.4) .use(express.static("folder name))->>> koe static folder ko kahai hai
               18.5) .use(cookieParser())-> cookie send krne ke liye
 
+     19) in src-> utils-> asyncHandler.js
+         for formet to resulbe function -> baar baar DB connection ke liye
