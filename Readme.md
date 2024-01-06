@@ -112,3 +112,21 @@ Write the class sentex of Responce send Error send
 
      21) write the syntex for Api Response
          in srx-> utils-> ApiResponse.js
+
+# Day-04
+
+### Today Agenda : now Start real Development of this Project
+
+     Create Model Its logic
+
+     22) Create User Model ---> in Src->Model--> user.model.js
+         in user model :-> (userName, email, fullName, password, avatar, coverImage, refreshToken, accessTocken, UpdateTimes, WatchHistory)
+         in which---> watchHistory count from Video Scheema model
+
+         coverImage and avatar not sore in Backend -> sore in other storage like Cloudnary or Amozone
+         in Backend Database-> store address of image or video
+
+          for create model need mongoose and Schema.
+
+     23) create Video model Scheema under Src-> models-> video.models.js
+         (videofile, thumbnail, title, description, duration, view, isPublished, owner--> from user)
