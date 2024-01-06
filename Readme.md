@@ -130,3 +130,31 @@ Write the class sentex of Responce send Error send
 
      23) create Video model Scheema under Src-> models-> video.models.js
          (videofile, thumbnail, title, description, duration, view, isPublished, owner--> from user)
+
+     24) for DB query -> write mongoDB  aggregate pipline
+         for this ---> npm i mongoose-aggregate-paginate-v2
+
+         for password security ----> use bcrypt
+            this ----> npm i bcrypt
+
+          for token jwt---> npm i jsonwebtoken
+           token use tile key---> jo token dega usse information deunga
+            token have 3 part:
+                 1) header ::-> algoritm type
+                 2) payload data :::-> information what you want share
+                 3) verify signature and secret base encode ----> for verification of user.
+
+    25) befor save user iformation bcrypt the password
+       for this in user.model.js -> use pre middleware
+        thus middleware take 2 paramere 1)Event 2)callback function
+        before the Event execute the callback function the event work
+
+    26) at sign in time we need to compair password
+        so user put is original password and in DB have bcrupted password
+        so compaire with the hepl od bcript model
+        in user.model.js ----> write method for it ----->
+
+    27) for Token
+        27.1) generate acces Token usint method using JWT
+        27.2) generate refresh Token using method using JWT
+        in user.model.js
