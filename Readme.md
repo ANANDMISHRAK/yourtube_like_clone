@@ -170,8 +170,9 @@ Write the class sentex of Responce send Error send
     then using cloudnary -> Backend server ------- to -----> cloudniry
 
     if successfullay upload or not then delete from Backend this photo or Video using FS module of express
+    :-
 
-    28.1)install MULTER : npm i multer
+    28.1) install MULTER : npm i multer
     28.2) signup or login in clounary (sign up ---> free version use ------> set up : node.js)
     28.3) after account creation --> cloudnary install in backend : npm i cloudinary
     28.4) copy cloudName , API secret from cloudnary and pest in .env file
@@ -180,3 +181,13 @@ Write the class sentex of Responce send Error send
     now local system to Backend
     28.5) in SRC->MIDDLEWARE -> multer.middleware.js
     write middleware for local to Backend
+
+###### Routing and Conroller
+
+: 29) wite Rouring and Controller
+
+     29.1)  creATE FILE IN src -> ROUTES-> USER.ROUTE.JS
+           CONFIGURE
+           EXPORT
+           IMPORT IN APP.JS
+           SET IN APP.JS THE ROUTE
