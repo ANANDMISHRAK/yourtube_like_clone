@@ -191,3 +191,7 @@ Write the class sentex of Responce send Error send
            EXPORT
            IMPORT IN APP.JS
            SET IN APP.JS THE ROUTE
+
+30. set router for user sig in process:-
+    30.1) for sign in time need to upload image avtar & cover image so need multer and cloudminary middleware then gives to controller to sign in
+    30.2) and write controller for sigin in in src-> controller-> userController.js
