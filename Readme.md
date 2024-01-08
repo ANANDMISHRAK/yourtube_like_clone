@@ -158,3 +158,25 @@ Write the class sentex of Responce send Error send
         27.1) generate acces Token usint method using JWT
         27.2) generate refresh Token using method using JWT
         in user.model.js
+
+# Day-05
+
+#### Agenda : setup Cloudnamy , multer middleware
+
+28. create account on Cloudnary and configure in project under Utils -> cloudinary.js
+
+    photo or video (local system )---to ----> Backend (temprory server in Public folder using MULTER middleware)
+
+    then using cloudnary -> Backend server ------- to -----> cloudniry
+
+    if successfullay upload or not then delete from Backend this photo or Video using FS module of express
+
+    28.1)install MULTER : npm i multer
+    28.2) signup or login in clounary (sign up ---> free version use ------> set up : node.js)
+    28.3) after account creation --> cloudnary install in backend : npm i cloudinary
+    28.4) copy cloudName , API secret from cloudnary and pest in .env file
+
+    these 29.2,3,4 is Backend to clounary
+    now local system to Backend
+    28.5) in SRC->MIDDLEWARE -> multer.middleware.js
+    write middleware for local to Backend
