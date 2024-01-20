@@ -1,10 +1,12 @@
 import mongoose, {Schema} from "mongoose";
-import { Video } from "./video.model";
+//import { Video } from "./video.model";
 import bcrypt from 'bcrypt'
-import { jwt } from "jsonwebtoken";
+import  jwt  from "jsonwebtoken";
+
+console.log(" i am in user model")
 const userSchema = new Schema(
     {
-        userName:{
+        username:{
                    type: String,
                    require:true,
                    unique:true,
@@ -62,20 +64,27 @@ const userSchema = new Schema(
     // gives true if not bcripted 
     if(this.isModified("password"))
     {
-      this.password= await bcrypt(thid.password, 10)
+     // console.log("wait for bcrypt password in userSchema pre middleware")
+      this.password= await bcrypt.hash(this.password, 10)
+     // console.log(this.password)
     }
     next()
  })
 
  // write method for password campair, user put password && DB save password
 
-  userSchema.method.isPasswordCorrect = async function(password)
+
+//  userSchema.methods.isPasswordCorrect = async function(password){
+//   return await bcrypt.compare(password, this.password)
+// }
+  userSchema.methods.isPasswordCorrect = async function(password)
   {
+    // console.log("copm pass word in userschema")
     return await bcrypt.compare(password, this.password)
   }
 
   // generate Access token Method 
-  userSchema.method.generateAccessToken = function(){
+  userSchema.methods.generateAccessToken = function(){
     return jwt.sign({
         _id: this._id,
         email:this.emai,
@@ -89,7 +98,7 @@ const userSchema = new Schema(
   }
 
   // generate Refresh Token Method
-  userSchema.method.generateRefreshToken =function(){
+  userSchema.methods.generateRefreshToken =function(){
     return jwt.sign({
         _id: this._id,
         email:this.emai,

@@ -195,3 +195,23 @@ Write the class sentex of Responce send Error send
 30. set router for user sig in process:-
     30.1) for sign in time need to upload image avtar & cover image so need multer and cloudminary middleware then gives to controller to sign in
     30.2) and write controller for sigin in in src-> controller-> userController.js
+
+31) testing user sign in controller in POSTMAN in body in form-data
+    Error got : throw new ApiError(...) not work due to this is throw error but i did not handle in catch block
+    so throw error is successfull work if handle in catch block
+
+# Day-06
+
+##### Agenda :- LOG-IN
+
+31. login controller  
+    31.1) take data fron Body {username, email}
+    31.2) validate data userName & email
+    31.3) find from DB
+    31.4) if not find then throw Error
+    31.5) now check password
+    31.6) access & Refresh Token Generate and send to user
+    31.7) send throw cookise
+    31.8) send response
+
+32. write router using Post method

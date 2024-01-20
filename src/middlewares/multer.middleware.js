@@ -1,7 +1,8 @@
 import multer from "multer";
 
-const storage = milter.diskStorage(
+const storage = multer.diskStorage(
     {
+    
         destination: function(req, file, cb)
         {
             //upload in  local system to backend file 
