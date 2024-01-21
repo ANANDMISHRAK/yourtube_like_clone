@@ -401,11 +401,18 @@ const changePassword = asyncHandler(async(req, res)=>{
 })
 
 
+const getCurrentUser = asyncHandler(async(req, res)=>{
+  return res
+  .status(200)
+  .json(new ApiResponse(200, req.user , "current user feched successfully"))
+})
+
 export {
   registerUser,
   loginUser,
   // testcontroller
   logOutUser,
   refreshAccessToken,
-  changePassword
+  changePassword,
+  getCurrentUser
 }

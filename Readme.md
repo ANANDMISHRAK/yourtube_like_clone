@@ -257,3 +257,10 @@ Write the class sentex of Responce send Error send
     35.5) return response
 
     this is in user controller
+
+36. who is current user -> send to frontend
+
+    36.1) req.user gives who is corrent user all information at time of lofin
+    direct send it in response
+
+    in router check login or not then controller work

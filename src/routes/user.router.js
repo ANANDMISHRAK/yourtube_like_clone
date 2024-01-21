@@ -1,7 +1,7 @@
 import express from "express";
 import{upload} from '../middlewares/multer.middleware.js'
 //import {testcontroller} from "../controllers/user.controller.js";
-import { changePassword, logOutUser, loginUser, refreshAccessToken, registerUser } from "../controllers/user.controller.js";
+import { changePassword, getCurrentUser, logOutUser, loginUser, refreshAccessToken, registerUser } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router= express();
 
@@ -24,6 +24,9 @@ router.route("/register").post(upload.fields([
 
   //change password
   router.route('/change-password').post(verifyJWT ,changePassword)
+
+  // current user profile
+  router.route('/current-user').get(verifyJWT, getCurrentUser)
 
 //this test router working correctliy so in register router gives erroe due to controller in side callback function 
 //this problem is due to asyncHandellar.js
