@@ -232,5 +232,16 @@ Write the class sentex of Responce send Error send
     33.7) update refresh token of DB is undefind
     33.8) return response
 
-
     now create Route in user.route.js-> using post method call middlewate verifyJWT then controller
+
+##### referesh token
+
+34. in repetated 15min or 30im 0r 1 hours need to login i.e. generate referesh & access token
+    but Login by pass all field is not a good practice so only refesh these token in one click and continuew login
+
+    ###### step
+
+    34.1) take Refresh Token : come from cookie -> docode it and find user from DB
+    34.2) compair refesh Token from DB
+    34.3) if match then generate access token
+    34.4) send response

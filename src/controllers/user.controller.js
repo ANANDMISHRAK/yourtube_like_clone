@@ -3,6 +3,7 @@ import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from '../utils/cloudinary.js'
+import Jwt from "jsonwebtoken"
 
 // generate access token method
 const generateAccessAndRefreshToken = async (userid) => {
@@ -308,12 +309,68 @@ const logOutUser = asyncHandler(async(req, res)=>{
                 }
 })
 
+const refreshAccessToken = asyncHandler(async(req, res)=>{
+  try{
+     // 1) take refresh token
+      const incommingRefreshToken= req.cookies.refereshToken || req.body.refereshToken
+  // console.log(incommingRefreshToken)
+      if(!incommingRefreshToken)
+      {
+        throw new ApiError(401, "UnAuthorized Request")
+      }
+      //2 got refresh Token then decode it
+      const decodeRefreshToken= Jwt.verify(incommingRefreshToken, process.env.REFRESH_TOKEN_SECRT)
 
+      //3 find from DB 
+      const user= await User.findById(decodeRefreshToken?._id)
+
+      if(!user)
+      {
+        throw new ApiError(401, "Invalid refresh Token ")
+      }
+    //console.log("user r t:  ", user)
+    // 4 now compire commingRefreshToken and DB refresh Token
+      if( incommingRefreshToken !== user?.refreshToken)
+      {
+        throw new ApiError(401, "Refresh Token is expired or used ")
+      }
+
+
+      //5 generate token both 
+      const {accessToken, newRefreshToken}=await generateAccessAndRefreshToken(user._id)
+
+      // 6 response send
+       const options ={
+                        httpOnly: true,
+                        secure: true
+                      }
+      
+
+      return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", newRefreshToken, options)
+      .json(new ApiResponse(200, 
+                            {accessToken, refreshToken:newRefreshToken},
+                            "Access Token Refreshed"
+                           ))
+
+     }
+  catch(error){
+               if(error instanceof ApiError)
+               {
+                 res.send(error.message)
+               }
+              //  else 
+              //     res.send(error.message)
+              }
+})
 
 
 export {
   registerUser,
   loginUser,
   // testcontroller
-  logOutUser
+  logOutUser,
+  refreshAccessToken
 }
