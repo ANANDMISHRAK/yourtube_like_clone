@@ -407,6 +407,41 @@ const getCurrentUser = asyncHandler(async(req, res)=>{
   .json(new ApiResponse(200, req.user , "current user feched successfully"))
 })
 
+const updateAccountDetails= asyncHandler(async(req, res)=>{
+  try{
+       // take fullname ans email from req.body
+       const {fullName, email}= req.body
+        if(!fullName || !email)
+        {
+          throw new ApiError(400, " required FullName and Email")
+        }
+       //find user and update using req.user._id
+       const user= await User.findByIdAndUpdate(
+                                                 req.user?._id,
+                                                 {
+                                                  $set:{
+                                                         fullName,
+                                                         email
+                                                       }
+                                                 },
+                                                 {
+                                                  new: true
+                                                 }
+                                               ).select("-password")
+                                    
+          // return response
+          return res
+          .status(200)
+          .json(new ApiResponse(200, user, " Account successfully updated"))
+     }
+  catch(error){
+                if(error instanceof ApiError)
+                {
+                  res.send(error.message)
+                }
+              }
+})
+
 export {
   registerUser,
   loginUser,
@@ -414,5 +449,6 @@ export {
   logOutUser,
   refreshAccessToken,
   changePassword,
-  getCurrentUser
+  getCurrentUser,
+  updateAccountDetails
 }

@@ -264,3 +264,9 @@ Write the class sentex of Responce send Error send
     direct send it in response
 
     in router check login or not then controller work
+
+37. update Account like fullName, email , both or one
+
+    37.1) take fullname and password from body
+    37.2) find user and update from DB using req.user.\_id
+    37.3) return response
