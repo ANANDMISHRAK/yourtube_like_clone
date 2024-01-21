@@ -245,3 +245,15 @@ Write the class sentex of Responce send Error send
     34.2) compair refesh Token from DB
     34.3) if match then generate access token
     34.4) send response
+
+#### Update User
+
+35. change current password
+
+    35.1) take data from req body -> oldPassword, newPassword
+    35.2) find user all things from DB using user.\_id
+    35.3)check given old password is match with DB password
+    35.4) if match then update and save
+    35.5) return response
+
+    this is in user controller
