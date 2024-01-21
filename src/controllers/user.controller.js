@@ -10,16 +10,17 @@ const generateAccessAndRefreshToken = async (userid) => {
    // console.log("in side user registration controller")
     const user = await User.findById(userid)
 
-    const acessToken = user.generateAccessToken()
+    const accessToken = user.generateAccessToken()
    // console.log(acessToken);
     const refereshToken = user.generateRefreshToken()
    // console.log(refereshToken)
 
     user.refreshToken = refereshToken
+   // user.accessToken= accessToken
     //console.log("user.retocken  : ", user.refereshToken)
     await user.save({ validateBeforeSave: false })
 
-    return { acessToken, refereshToken }
+    return { accessToken, refereshToken }
   }
   catch (error) {
     throw new ApiError(500, "somethis went wrong while generate Access or Referesh Token")
@@ -242,7 +243,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   //5. generate access token using method in above according to user id
-  const { acessToken, refereshToken } = await generateAccessAndRefreshToken(user._id)
+  const { accessToken, refereshToken } = await generateAccessAndRefreshToken(user._id)
 
   //6. send throw coolis
   const loginUser = await User.findById(user._id).select("-password -refreshToken")
@@ -252,12 +253,12 @@ const loginUser = asyncHandler(async (req, res) => {
     secure: true
   }
 
-  return res.status(200).cookie("accessToken", acessToken, option)
+  return res.status(200).cookie("accessToken", accessToken, option)
     .cookie("refereshToken", refereshToken, option)
     .json(new ApiResponse(
       200,
       {
-        user: loginUser, acessToken, refereshToken
+        user: loginUser, accessToken, refereshToken
       },
       "User logged in sucessfully"
     ))
@@ -270,6 +271,43 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
+const logOutUser = asyncHandler(async(req, res)=>{
+    try{
+         // get response from verifyJWT controller from middleware->auth.middleware.js-> here check userlogin or not
+         // and if log in then send responce , in responce got here all things of user
+         //then task 1) update DB refresh token ->undefined i.e not access to use now without login 
+          await User.findByIdAndUpdate(
+                                        req.user._id,
+                                        {
+                                          // $set:{
+                                          //        refreshToken: undefined
+                                          //      },
+                                          $unset: {
+                                            refreshToken: 1 // this removes the field from document
+                                        }
+                                        },
+                                        {
+                                          new: true
+                                        }
+                                       )
+
+          // task 2) send response
+          // option user for not change response value by user, only change by server or Backen
+           const options ={
+                            httpOnly: true,
+                            secure: true
+                          }
+            return res
+            .status(200)
+            .clearCookie("accessToken", options)
+            .clearCookie("refreshToken", options)
+            .json(new ApiResponse(200, {}, "User successfully LogOut"))
+       }
+    catch(error){
+                  res.send(error.message)
+                }
+})
+
 
 
 
@@ -277,4 +315,5 @@ export {
   registerUser,
   loginUser,
   // testcontroller
+  logOutUser
 }

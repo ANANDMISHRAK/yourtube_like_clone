@@ -214,4 +214,23 @@ Write the class sentex of Responce send Error send
     31.7) send throw cookise
     31.8) send response
 
-32. write router using Post method
+32. write router using Post method for login
+
+# Day-07
+
+##### Agenda : - LogOut process
+
+33. Log Out Controller in User.controller.js
+
+    33.1) user is login or not check using middleWare -> auth.middleware.js--> method name verifyJWT
+    33.2) if user is log in then find access token via Cookies , colies get from req.cookies or req.header
+    33.3) if got access token then decode this token
+    33.4) by help of decoded token have user detels , so find user information from DB by help of user.\_id
+    33.5) then send this user in res then call next() this (33.1,2.3.4.5) work in middlewate
+
+    33.6) got user then now work in logout controller
+    33.7) update refresh token of DB is undefind
+    33.8) return response
+
+
+    now create Route in user.route.js-> using post method call middlewate verifyJWT then controller
