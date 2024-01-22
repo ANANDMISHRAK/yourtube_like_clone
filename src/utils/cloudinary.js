@@ -13,7 +13,7 @@ cloudinary.config({
 
 const uploadOnCloudinary = async (localPath)=>{
     try{
-       console.log(" in  backend to cloudinary")
+      // console.log(" in  backend to cloudinary")
           if(! localPath) return null
 
           const result = await cloudinary.uploader.upload(
@@ -35,4 +35,27 @@ const uploadOnCloudinary = async (localPath)=>{
          return null;
      }
 }
-export { uploadOnCloudinary }
+
+const deletefromCloudinary = async(pathOfCloudinary)=>{
+  try{
+       if(!pathOfCloudinary) return null
+      // console.log(pathOfCloudinary)
+      const result= await cloudinary.uploader
+      .destroy(pathOfCloudinary, {resource_type: 'image', type: 'upload'})
+
+      // cloudinary.v2.api
+      // .delete_resources([pathOfCloudinary], 
+      //   { type: 'upload', resource_type: 'auto' })
+      
+
+      // console.log("delete cloudinary response : ", result)
+          return result
+    }
+  catch(error){
+               console.log("not work")
+                  return null
+              }
+}
+export { uploadOnCloudinary,
+         deletefromCloudinary
+       }

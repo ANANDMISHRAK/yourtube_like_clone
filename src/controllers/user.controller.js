@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js"
-import { uploadOnCloudinary } from '../utils/cloudinary.js'
+import { deletefromCloudinary, uploadOnCloudinary } from '../utils/cloudinary.js'
 import Jwt from "jsonwebtoken"
 
 // generate access token method
@@ -136,7 +136,7 @@ const registerUser = asyncHandler( async (req, res) => {
 
   try{
   const {fullName, email, username, password } = req.body
-  //console.log("email: ", email);
+ // console.log("email: ", email);
    
   if (
       [fullName, email, username, password].some((field) => field?.trim() === "")
@@ -152,32 +152,38 @@ const registerUser = asyncHandler( async (req, res) => {
       throw new ApiError(409, "User with email or username already exists")
   }
   //console.log(req.files);
-
+  //  if(!existedUser)
+  //  {
+  //   console.log("user not in db")
+  //  }
   const avatarLocalPath = req.files?.avatar[0]?.path;
   //const coverImageLocalPath = req.files?.coverImage[0]?.path;
-
+//console.log(avatarLocalPath)
   let coverImageLocalPath;
   if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
       coverImageLocalPath = req.files.coverImage[0].path
   }
   
-
+ // console.log("c i :-  ", coverImageLocalPath)
   if (!avatarLocalPath) {
       throw new ApiError(400, "Avatar file is required")
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath)
+  //console.log("avatar -  ", avatar.url)
   const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
   if (!avatar) {
       throw new ApiError(400, "Avatar file is required")
   }
  
-
+  //console.log(coverImage.url)
   const user = await User.create({
       fullName,
       avatar: avatar.url,
-      coverImage: coverImage?.url || "",
+      coverImage:coverImage.url || "",
+      avatarUplicId:avatar.public_id,
+      coverPublicId:coverImage?.public_id || "",
       email, 
       password,
       username: username.toLowerCase()
@@ -442,6 +448,57 @@ const updateAccountDetails= asyncHandler(async(req, res)=>{
               }
 })
 
+ const updateAvatar = asyncHandler(async(req, res)=>{
+  try{
+       //1 take locatl image path from req.file
+       const localAvatarPath= req.file?.path
+       if(!localAvatarPath)
+       {
+        throw new ApiError(401, "Avatar image is requyired || local path requried")
+       }
+
+       //2 find user from database
+       const user= await User.findById(req.user._id).select("-password")
+
+       if(!user)
+       {
+        throw new ApiError(401,"invalid user" )
+       }
+       // delete old avatar from cloudinary -> chhor diye abhi q ki delete krne ke liye pic ka public id chahiye 
+       // to at starting time me hi dada base pe store krna hoga ye last me krunga
+       const deleteoldAvatar= await  deletefromCloudinary(user?.avatarUplicId)
+        if(!deleteoldAvatar)
+        {
+          throw new ApiError(401, "not deletre old avatar from clouinary")
+        }
+       // now upload on clodinary
+       const avatar= await uploadOnCloudinary(localAvatarPath)
+
+       if(!avatar.url)
+       {
+        throw new ApiError(400, "Error while uploading avatat on clodinary")
+       }
+
+       // if successful upload then save in DB
+       user.avatar=avatar.url
+       user.avatarUplicId=avatar.public_id
+       await user.save({validateBeforeSave: false})
+       
+
+       //return response
+        return res
+        .status(200)
+        .json(new ApiResponse(200, user, "Avatar image updated successfully"))
+
+      }
+  catch(error){
+     if(error instanceof ApiError)
+     {
+      res.send(error.message)
+     }
+  }
+ })
+
 export {
   registerUser,
   loginUser,
@@ -450,5 +507,6 @@ export {
   refreshAccessToken,
   changePassword,
   getCurrentUser,
-  updateAccountDetails
+  updateAccountDetails,
+  updateAvatar
 }

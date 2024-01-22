@@ -270,3 +270,12 @@ Write the class sentex of Responce send Error send
     37.1) take fullname and password from body
     37.2) find user and update from DB using req.user.\_id
     37.3) return response
+
+38. update Avatar Image
+
+    38.1) take local Avatar image from req.file. path
+    38.2) upload on cloudnariry
+    38.3) find user from data base
+    38.4) deletd old avatar from clodinary using db avatar path
+    38.5) set new path of avatar in DB
+    38.6) return response
