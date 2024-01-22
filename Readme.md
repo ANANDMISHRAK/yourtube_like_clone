@@ -279,3 +279,15 @@ Write the class sentex of Responce send Error send
     38.4) deletd old avatar from clodinary using db avatar path
     38.5) set new path of avatar in DB
     38.6) return response
+
+39. Update Cover Image
+
+    39.1) take local Cover Image from req.file.path
+    39.2)find user fron req.user
+    39.3)check , is coverImage url is present in DB (for old COVER Image) then
+    39.3.1) yes -> then remove from clodinary user coverImage Publick id
+    39.4) now present coverimage upload on cloudinary
+    39.5) set and save in Database
+    39.6) return response
+
+    write router in user.router.js

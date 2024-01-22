@@ -499,6 +499,59 @@ const updateAccountDetails= asyncHandler(async(req, res)=>{
   }
  })
 
+ const updateCoverImage = asyncHandler(async(req, res)=>{
+  try{
+       //1 take cover image from req.file
+       const curCoverImage= req.file?.path
+
+       if(!curCoverImage)
+       {
+        throw new ApiError(401, "cover Image is requere")
+       }
+
+       //2. find user from database
+       const user= await User.findById(req.user._id).select("-password")
+
+       //3. check old cover image have or not if have then delete
+       if(user.coverImage)
+       {
+         const deleteCoverImg = await deletefromCloudinary(user?.coverPublicId)
+          if(!deleteCoverImg)
+          {
+            throw new ApiError(401, "cover Image is Not deleted")
+          }
+       }
+
+       // 4. upload new cover image on cloudinary
+       const uploadcoverImg= await uploadOnCloudinary(curCoverImage);
+
+       if(!uploadcoverImg)
+       {
+        throw new ApiError(401, "not uploade Cover Img")
+       }
+
+       // 5 set and save in DB
+       user.coverImage= uploadcoverImg.url
+       user.coverPublicId= uploadcoverImg.public_id
+
+       await user.save({validateBeforeSave: false})
+
+       //6 send response
+
+       return res
+       .status(200)
+       .json(
+        new ApiResponse(200, user, "Cover Image successfully Updated")
+       )
+     }
+  catch(error){
+                if(error instanceof ApiError)
+                {
+                  res.send(error.message)
+                }
+              }
+ })
+
 export {
   registerUser,
   loginUser,
@@ -508,5 +561,6 @@ export {
   changePassword,
   getCurrentUser,
   updateAccountDetails,
-  updateAvatar
+  updateAvatar,
+  updateCoverImage
 }
