@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js"
 import { deletefromCloudinary, uploadOnCloudinary } from '../utils/cloudinary.js'
 import Jwt from "jsonwebtoken"
+import mongoose from "mongoose"
 
 // generate access token method
 const generateAccessAndRefreshToken = async (userid) => {
@@ -644,6 +645,64 @@ const updateAccountDetails= asyncHandler(async(req, res)=>{
               }
  })
 
+ // from watch history
+
+ const watchHistory = asyncHandler(async(req, res)=>{
+  try{
+        const user = await User.aggregate(
+          [
+            {
+              $match :{_id : new mongoose.Types.ObjectId(req.user?._id)}
+            },
+            {
+              $lookup: {
+                         from: "Video",
+                         localField:"watchHistory",
+                         foreignField:"_id",
+                         as: "whatchHistory",
+
+                         pipeline : 
+                         [
+                          {
+                            $lookup : {
+                                        from: "User",
+                                        localField:"owner",
+                                        foreignField: "_id",
+                                        as: "Owner",
+                                        pipeline : 
+                                        [
+                                          {
+                                            $project:
+                                            {
+                                              fullName: 1,
+                                              username: 1,
+                                              avatar: 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                          },
+                          {
+                            $addFields :{
+                                          Owner : {$first : "$Owner"}
+                                        }
+                          }
+                         ]
+                       }
+            }
+          ]
+        )
+
+        return res
+        .status(200)
+        .json(new ApiResponse(200, user[0].watchHistory, " whatch History fetched successfully"))
+     }
+  catch(error)
+  {
+      res.send(error)
+  }
+ })
+
 export {
   registerUser,
   loginUser,
@@ -655,5 +714,6 @@ export {
   updateAccountDetails,
   updateAvatar,
   updateCoverImage,
-  getUserChannelProfile
+  getUserChannelProfile,
+  watchHistory
 }
