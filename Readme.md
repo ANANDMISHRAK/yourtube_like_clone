@@ -291,3 +291,76 @@ Write the class sentex of Responce send Error send
     39.6) return response
 
     write router in user.router.js
+
+Now in frontend user profile need to show , How many channel , user have subscribe
+and how many people is subscribe user channel Like : follower and Following on instaGram or Youtube
+
+so need
+
+###### create Subscription schema
+
+40. subscription schema
+    id ---> create my mongoDB
+    subscriber ---> user id from user model : -> how many people subscribe you Like Fllower
+    chanel ---> user id from user model : -> how many channel you subscribe Like Following
+    timestamps
+
+41. how to find subscriber : How many people follow you i.e. : Follower
+    let a, b, c,d, e, f, g,h, i, j user on site , in which f, g, h, i, have channel -> ye video upload krta hai
+    a user subscribe to g channel
+    a- {
+    subscriber: a,
+    channel: g
+    }
+
+    b user subscribe to g channel
+    b- {
+    subscriber: b,
+    channel: g
+    }
+
+    c user subscribe to g channel
+    c- {
+    subscriber: c,
+    channel: g
+    }
+
+    c user subscribe to h channel
+    c- {
+    subscriber: c,
+    channel: h
+    }
+
+    c user subscribe to i channel
+    c- {
+    subscriber: c,
+    channel: i
+    }
+
+    ques - > i channel ko kitna subscriber hai :- find follower
+    count all document , which channel value is equal to "i" i.e. ---> 1
+
+    ques -> i am user "c" , kitne channel ko subscribe kiya hu -> find following
+    count all document , which subscriber value is equal to "C"
+
+    ye user ke profile pe show krwana hai to user controller me hi eska controller likhe
+
+    ##### Step to find subscriber of user
+
+    step 1 -> subscription collection ko left join krna hoga user collection ke sath so need
+    aggregation pipline
+    step 2 -> find kis user ka subscriper find krna hai so user Name chaliye jo url se milega -> use req.params
+    step 3 -> write aggrigation pipline
+
+    step to use aggregation
+    step 1 -> find document from User which uaserName match -> using match operation
+    step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
+    step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
+    if local or forign match krega usse count kr lenge
+
+        similler to find How many Followung same lookup
+
+        then Addfield se dono ko add kr lenge
+
+        in last Project kr dunga
+        and response send

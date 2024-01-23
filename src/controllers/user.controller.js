@@ -552,6 +552,98 @@ const updateAccountDetails= asyncHandler(async(req, res)=>{
               }
  })
 
+ // controller for count follower and fowollinh
+
+ const getUserChannelProfile = asyncHandler(async(req, res)=>
+ {
+  try{
+       // take user Name from url 
+       const {username}= req.params 
+
+       if(!username)
+       {
+        throw new ApiError(401, " userName is required")
+       }
+
+       // aggregation
+
+       const channel = await User.aggregate(
+        [
+          {
+            $match: {username: username?.toLowerCase()}
+          },
+          // lookup for find follower
+          {
+            $lookup: {
+                       from: "Subscription",
+                       localField: "-id",
+                       foreignField:"channel",
+                       as:"subscribers"
+                     }
+          },
+          // lookup for find following
+          {
+            $lookup: {
+                       from: "Subscription",
+                       localField:"_id",
+                       foreignField:"subscriber",
+                       as:"subscribeTo"
+                     }
+          },
+          // add field for count and gives sigmal who is subscribe or not
+          {
+            $addFields: {
+                          subscribersCount : {
+                                               $size: "$subscribers"
+                                             },
+                          channelSubscribeToCount: {
+                                                     $size : "$subscribeTo"
+                                                   },
+                          isSubscribed : {
+                                           $cond: {
+                                                     if : {$in :[req.user?._id, "$subscribers.subscriber"]},
+                                                     then: true,
+                                                     else: false
+                                                  }
+                                         }
+                        }
+          },
+          // project this all count 
+          {
+            $project : {
+                         fullName: 1,
+                         username: 1,
+                         subscribersCount:1,
+                         channelSubscribeToCount: 1,
+                         isSubscribed: 1,
+                         avatar: 1,
+                         coverImage: 1,
+                         email: 1
+                       }
+          }
+
+        ]
+       )
+
+       if(!channel?.length)
+       {
+        throw new ApiError(401, " channel does not Exists")
+       }
+
+       // return response
+
+       return res
+       .status(200)
+       .json(new ApiResponse(200, channel[0], " User channel fetched successfull"))
+     }
+  catch(error){
+                if(error instanceof ApiError )
+                {
+                  res.send(error.message)
+                }
+              }
+ })
+
 export {
   registerUser,
   loginUser,
@@ -562,5 +654,6 @@ export {
   getCurrentUser,
   updateAccountDetails,
   updateAvatar,
-  updateCoverImage
+  updateCoverImage,
+  getUserChannelProfile
 }
