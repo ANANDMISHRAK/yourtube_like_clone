@@ -9,8 +9,7 @@ cloudinary.config({
 });
 // console.log("clod name",process.env.CLOUDINARY_CLOUD_NAME);
 // console.log("clod key",process.env.CLOUDINARY_API_KEY);
-// console.log("clod secret",process.env.CLOUDINARY_API_SECRET);
-
+// console.log("clod secret",process.env.CLOUDINARY_API_SECRET
 const uploadOnCloudinary = async (localPath)=>{
     try{
       // console.log(" in  backend to cloudinary")

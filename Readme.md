@@ -370,3 +370,67 @@ so need
 ###### for whatch Histroy
 
 similler for watch history piple line fron Video model
+
+now user things is compited so move on create comment , like , tweet models
+
+###### create Comment.model.js
+
+    _id:  from mongo Db
+    content: string
+    video: kis video pe comment huaa due to -> id of video
+    owner: kon user comment kiya uska id
+    timeStamps
+
+    in this plugin pipeline aggrigration
+
+    simmilar to like, playlist, tweet model created in model folder
+
+###### alll work is done , now only do write controller and is router and use in app.js
+
+write controller fails : 1. Video controller -> video.controller.js 2. subscription controller ->subscription.controller.js 3. playlist controller -> playlist.controller.js 4. comment controller 5. like controller 6. tweet controller 7. dashboard controller 8. healthcheck controller
+
+                            respective all write router and aap.use( in app.js
+
+                            )
+
+# Day-09
+
+##### in Video Controller
+
+1.  write video publish controller ->
+    in middleware check user login or not
+
+    if log in then start to work in controller
+    step 1 - take title and description fron req. body
+    step 2 - take video local path and thumblin local path from req.files.video[0].path simillar to thumblin
+    step 3 - now upload both on cloudnary
+    step 4 - create user
+    step 5 - check created or not
+    step 6 - return response
+
+2.  Update Video title , description , and thumbnail
+    step 1- take videoId from url
+    step 2 - take title, description from body
+    step 3 - take thumbnail from file
+    step 4 - if video all about from collention DB in Video
+    step 5 - check video.owner is eualt to user.\_id - user from req.user
+    step 6 - now thumbnail upload on cloudinary
+    step 7 - delete old thumbnail
+    step 8 - now findbyidAndUpdate
+    step 9 - return response
+
+3.  delete video operation
+    step 1 - take video id from url
+    step 2 - find video from collection
+    step 3 - check video owner is equal to user id , user from req. user
+    step 4 - now delete video from cloudinary
+    step 5 - delete thumbnail from cloudinary
+    step 6 - delete document fron video collectiuon
+    step 7 - return response
+
+4.  get updio by id
+    step 1 - take id from url
+    step 2 - find video using find by id from collection
+    step 3 - return response
+
+5.  find all video -> per find return 10 video
