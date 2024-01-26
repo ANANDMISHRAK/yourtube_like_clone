@@ -353,9 +353,9 @@ so need
                                      step 3 -> write aggrigation pipline
 
     step to use aggregation
-                          step 1 -> find document from User which uaserName match -> using match operation
-                          step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
-                          step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
+                                     step 1 -> find document from User which uaserName match -> using match operation
+                                     step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
+                                     step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
     if local or forign match krega usse count kr lenge
 
         similler to find How many Followung same lookup
@@ -409,6 +409,7 @@ write controller fails :
     in middleware check user login or not
 
     if log in then start to work in controller :
+    
                                                            step 1) - take title and description fron req. body
                                                            step 2) - take video local path and thumblin local path from req.files.video[0].path simillar to thumblin
                                                            step 3) - now upload both on cloudnary
@@ -416,7 +417,8 @@ write controller fails :
                                                            step 5) - check created or not
                                                            step 6) - return response
 
-2.  Update Video title , description , and thumbnail :
+3.  Update Video title , description , and thumbnail :
+4.  
                                                            step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
@@ -427,7 +429,8 @@ write controller fails :
                                                            step 8) - now findbyidAndUpdate
                                                            step 9) - return response
 
-3.  delete video operation :
+5.  delete video operation :
+6.  
                                                            step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
@@ -436,19 +439,21 @@ write controller fails :
                                                            step 6) - delete document fron video collectiuon
                                                            step 7) - return response
 
-4.  get updio by id :
+7.  get updio by id :
                                                            step 1) - take id from url
                                                            step 2) - find video using find by id from collection
                                                            step 3) - return response
 
-5.  change the publice status of video :
+8.  change the publice status of video :
+9.  
                                                            step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
                                                            step 5) - return response
 
-6.  get all video in one take pass 10 video and sorted order :
+10.  get all video in one take pass 10 video and sorted order :
+11.  
                                                            step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
                                                            step 2) - create pipline
                                                            step 3) - push query
