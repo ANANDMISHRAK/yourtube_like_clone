@@ -11,6 +11,72 @@ const getAllVideos = asyncHandler(async (req, res) => {
     try{
     const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query
     //TODO: get all videos based on query, sort, pagination
+    if(!userId)
+    {
+        throw new ApiError(401, " required UserId")
+    }
+  // create array of pipeline
+    const pipeline =[]
+
+    //for using full text based search then need to create a search index in DB collection
+    // you can inclide field mapping in search index eg: title , description, as well 
+    // field mapping specify which fields within your document should be indexed for text search.
+    //this help in searching only in title, description providing faster search results
+    // here the name of search index is  " search-video"
+
+    if(query)
+    {
+        pipeline.push({
+                       $search :{
+                                  index:"searchVideo",
+                                  text: {
+                                         query:query,
+                                         path: ["description", "title"]
+                                        }
+                                }
+                     });
+
+    }
+
+    //filter video document according user id, and push in pipline array
+    pipeline.push({
+                   $match: {
+                             owner: new mongoose.Types.ObjectId(userId)
+                           }
+                 })
+
+    // fetch videos only that are set publice status as true
+    pipeline.push({$match:{isPublished: true}});
+
+    // sortBy can be view, cretateAt , duration
+    // sortType can be ascending (1) or descending(-1)
+    if(sortBy && sortType)
+    {
+       pipeline.push({
+                       $sort: {
+                                [sortBy]: sortType ==='asc'?1 :-1
+                              }
+                    });
+    }
+    else{
+        pipeline.push({$sort: {createdAt : -1}});
+    }
+    //aggerate video according to pipline
+    const videoAggregate =await Video.aggregate(pipeline)
+
+    // create option 
+    const options = {
+                      page : parseInt(page, 10),
+                      limit : parseInt(limit, 10)
+                    };
+
+    // aggregate the video
+    const video = await Video.aggregatePaginate(videoAggregate, options);
+
+    //return response
+    return res
+    .status(200)
+    .json(new ApiResponse(200, video, "video featched successfully"))
     }
     catch(error)
     {
@@ -278,7 +344,56 @@ const deleteVideo = asyncHandler(async (req, res) => {
 })
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
+    try{
     const { videoId } = req.params
+    if(! videoId)
+    {
+        throw new ApiError(401, "Video id is required")
+    }
+
+    // find all things of video from DB
+    const video = await Video.findById(videoId);
+
+    if(!video)
+    {
+        throw new ApiError(401, "Video Id is unvalid")
+    }
+
+    // user is coreect to change in video DB
+    if(video.owner.toString() !== req.user?._id.toString())
+    {
+        throw new ApiError(401, "UnAuthorized to access")
+    }
+
+    // user is correct , so change now
+    const toggleVideoStatus = await Video.findByIdAndUpdate(
+                                                              videoId,
+                                                              {
+                                                                $set :{
+                                                                        isPublished : !video.isPublished
+                                                                      }
+                                                              }
+                                                           )
+
+    // check 
+    if(!togglePublishStatus)
+    {
+        throw new ApiError(401, "video status is not change")
+    }
+
+    // return response
+    return res
+    .status(200)
+    .json( new ApiResponse(200, toggleVideoStatus, "video status successfully change"))
+
+    }
+    catch(error)
+    {
+        if(error instanceof ApiError)
+        {
+            res.send(error.message)
+        }
+    }
 })
 
 export {
