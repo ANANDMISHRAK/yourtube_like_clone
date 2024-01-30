@@ -15,8 +15,10 @@ const getAllVideos = asyncHandler(async (req, res) => {
     {
         throw new ApiError(401, " required UserId")
     }
+   // console.log(userId)
   // create array of pipeline
     const pipeline =[]
+    //console.log("array created")
 
     //for using full text based search then need to create a search index in DB collection
     // you can inclide field mapping in search index eg: title , description, as well 
@@ -37,7 +39,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
                      });
 
     }
-
+   // console.log("push query if have")
     //filter video document according user id, and push in pipline array
     pipeline.push({
                    $match: {
@@ -45,9 +47,11 @@ const getAllVideos = asyncHandler(async (req, res) => {
                            }
                  })
 
+   // console.log("push in array")
+
     // fetch videos only that are set publice status as true
     pipeline.push({$match:{isPublished: true}});
-
+ // console.log('select true status video')
     // sortBy can be view, cretateAt , duration
     // sortType can be ascending (1) or descending(-1)
     if(sortBy && sortType)
@@ -61,9 +65,10 @@ const getAllVideos = asyncHandler(async (req, res) => {
     else{
         pipeline.push({$sort: {createdAt : -1}});
     }
+   // console.log("select by order")
     //aggerate video according to pipline
     const videoAggregate =await Video.aggregate(pipeline)
-
+    //  console.log("aggregate the video")
     // create option 
     const options = {
                       page : parseInt(page, 10),
@@ -72,7 +77,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
     // aggregate the video
     const video = await Video.aggregatePaginate(videoAggregate, options);
-
+   //console.log("pagineted video")
     //return response
     return res
     .status(200)
@@ -165,6 +170,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
     try{ 
     const { videoId } = req.params
+   // console.log("videoid :  ", videoId)
     if(!videoId)
      {
         throw new ApiError(401, "video id is required!")
@@ -175,6 +181,7 @@ const getVideoById = asyncHandler(async (req, res) => {
     {
       throw new ApiError(401, "video is not avabilble")
     }
+    //console.log("video finded from collection")
     // return response
     return res
     .status(200)
@@ -207,27 +214,27 @@ const updateVideo = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Title and description is required")
     }
     // take thumbnail from req. file
-    const {thumbnailLoaclPath}= req.file.path
+    const thumbnailLoaclPath= req.file?.path
     if(!thumbnailLoaclPath)
     {
         throw new ApiError(401, "Thumbnail is required")
     }
 
     // find video from video collection 
-
+      console.log("thumbnail is came in backend")
     const video = await Video.findById(videoId)
 
     if(!video)
     {
         throw new ApiError(401, "this video is not avilable ")
     }
-
+    console.log("video document is finded")
     // take all about user req.user-> jo video update krega kya ye ussi ka channel hai
      if(video.owner.toString() !== req.user?._id.toString())
      {
         throw new ApiError(401, "Unauthorized to update")
      }
-
+     console.log("authorized to update")
      //now upload thubmnail on cloudnary and delete old thumbnail after sucefffull upload new thumbnail
      
 
@@ -236,15 +243,15 @@ const updateVideo = asyncHandler(async (req, res) => {
      {
         throw new ApiError(401, "Thubnail is not uploaded")
      }
-
+     console.log("thumbnail is upload on cloudinary")
      // uploaded new thumbnail then delete old
-     const deleteoldThumbnail= await deletefromCloudinary(Video.thumbnail.public_id)
+     const deleteoldThumbnail= await deletefromCloudinary(video.thumbnail.public_id)
 
      if(!deleteoldThumbnail)
      {
         throw new ApiError(401, " old thumbnil is not deleted ")
      }
-
+     console.log("old thumbnail is delete on cloudinary")
      // update in collection document
      const updateVideo = await Video.findByIdAndUpdate(
                                                         videoId,
@@ -322,6 +329,7 @@ const deleteVideo = asyncHandler(async (req, res) => {
       {
         throw new ApiError(401, "thumbnail does not deleted")
       }
+      
       // update in document
       const deleteVideoDB = await Video.findByIdAndUpdate(videoId)
         if(!deleteVideoDB)

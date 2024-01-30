@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import userRouter from './routes/user.router.js'
 import videoRouter from './routes/video.router.js'
+import platlistRouter from './routes/playlist.router.js'
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 //for routing - set routing stsrting api 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/video', videoRouter)
+app.use('api/v1/playlist', platlistRouter)
 
 
 export {app}

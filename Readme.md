@@ -458,3 +458,88 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
 # Day 10
 
 ##### Now work in PayList Controller, routing
+
+controller name:
+
+                    create playlist
+                    add video to playlist
+                    remove video from playlist
+                    get playlist by id
+                    get user playlist
+                    update playlist
+                    delete playlist
+
+###### createPlaylist controller
+
+Only create playlist in which not have video now : 1. take name & description of playlist from user 2. then create it 3. return response
+
+##### create addVideoToPlaylist
+
+      only admin i.e. owner of playlist add video , which uploaded by self video
+
+         1. take playlistId and videoId from url
+         2. find playlist and video from DB
+         3. check user is correct to add in this playlist
+         4. update that playlist document
+         5.return response
+
+##### create removeVideo from playlist
+
+        only owner of playlist remove video from playlist
+
+        1. tale videoid and playlist id from url
+        2.  find video and playlist from DB
+        3.  check user Authorized to this work or not
+        4. update document using PULL operation in db
+        5. return response
+
+##### create get playlist by id controller
+
+     any user can find playlist by id and see all video of that playlist and playlist description & name
+
+       1. take playlist id from url
+       2. find playlist from DB
+       3. write pipeline aggregration in playlist model -> all video , all things of owner of video
+       4. return response
+
+##### create get user playlist
+
+take user id from url and findll all playlist of this uder
+
+      1. take user id from url
+      2. find user from DB
+      3. now write pipeline aggregratin in playlist which owner match with user id
+      4. return response
+
+##### create update playlist controller
+
+     owner of this playlist can update title and description of this playlist
+
+        1. take playlist id from url
+        2. take title and description from body
+        3. find playlist through ID
+        4. check user id Authorized for this work or not
+        5. update
+        6. return response
+
+##### create delete Playlist controller
+
+      owner of this playllist delete the playlist
+
+       1. take playlist if from url
+       2. find Playlist document from DB
+       3. check user is Authorized
+       4. delete from Collection
+       5.  return response
+
+###### write router for respective all controller for Playlist
+
+# Day-11
+
+#### Now work on Comment controller
+
+     Name of controller:
+                        add comment , or create comment
+                        update comment
+                        delete comment
+                        get / find all comment on a video

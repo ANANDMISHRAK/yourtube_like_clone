@@ -15,7 +15,7 @@ router.route('/upload-video').post(verifyJWT,
                                                         maxCount: 1
                                                     },
                                                     {
-                                                        name : "thumbNail",
+                                                        name : "thumbnail",
                                                         maxCount: 1
                                                     }
                                                   ]
