@@ -205,14 +205,14 @@ Write the class sentex of Responce send Error send
 ##### Agenda :- LOG-IN
 
 31. login controller  
-                          31.1) take data fron Body {username, email}
-                          31.2) validate data userName & email
-                          31.3) find from DB
-                          31.4) if not find then throw Error
-                          31.5) now check password
-                          31.6) access & Refresh Token Generate and send to user
-                          31.7) send throw cookise
-                          31.8) send response
+     31.1) take data fron Body {username, email}
+    31.2) validate data userName & email
+    31.3) find from DB
+    31.4) if not find then throw Error
+    31.5) now check password
+    31.6) access & Refresh Token Generate and send to user
+    31.7) send throw cookise
+    31.8) send response
 
 32. write router using Post method for login
 
@@ -227,7 +227,7 @@ Write the class sentex of Responce send Error send
                           33.3) if got access token then decode this token
                           33.4) by help of decoded token have user detels , so find user information from DB by help of user.\_id
                           33.5) then send this user in res then call next() this (33.1,2.3.4.5) work in middlewate
-                      
+
                           33.6) got user then now work in logout controller
                           33.7) update refresh token of DB is undefind
                           33.8) return response
@@ -353,9 +353,9 @@ so need
                                      step 3 -> write aggrigation pipline
 
     step to use aggregation
-                                     step 1 -> find document from User which uaserName match -> using match operation
-                                     step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
-                                     step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
+    step 1 -> find document from User which uaserName match -> using match operation
+    step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
+    step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
     if local or forign match krega usse count kr lenge
 
         similler to find How many Followung same lookup
@@ -387,15 +387,7 @@ now user things is compited so move on create comment , like , tweet models
 
 ###### alll work is done , now only do write controller and is router and use in app.js
 
-write controller fails :
-                        1. Video controller -> video.controller.js
-                        2. subscription controller ->subscription.controller.js
-                        3. playlist controller -> playlist.controller.js 
-                        4. comment controller 
-                        5. like controller
-                        6. tweet controller 
-                        7. dashboard controller 
-                        8. healthcheck controller
+write controller fails : 1. Video controller -> video.controller.js 2. subscription controller ->subscription.controller.js 3. playlist controller -> playlist.controller.js 4. comment controller 5. like controller 6. tweet controller 7. dashboard controller 8. healthcheck controller
 
                             respective all write router and aap.use( in app.js
 
@@ -409,7 +401,7 @@ write controller fails :
     in middleware check user login or not
 
     if log in then start to work in controller :
-    
+
                                                            step 1) - take title and description fron req. body
                                                            step 2) - take video local path and thumblin local path from req.files.video[0].path simillar to thumblin
                                                            step 3) - now upload both on cloudnary
@@ -417,9 +409,8 @@ write controller fails :
                                                            step 5) - check created or not
                                                            step 6) - return response
 
-3.  Update Video title , description , and thumbnail :
-4.  
-                                                           step 1)- take videoId from url
+2.  Update Video title , description , and thumbnail :
+3.                                                                                           step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
                                                            step 4) - if video all about from collention DB in Video
@@ -429,9 +420,8 @@ write controller fails :
                                                            step 8) - now findbyidAndUpdate
                                                            step 9) - return response
 
-5.  delete video operation :
-6.  
-                                                           step 1) - take video id from url
+4.  delete video operation :
+5.                                                                                           step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
                                                            step 4) - now delete video from cloudinary
@@ -439,32 +429,30 @@ write controller fails :
                                                            step 6) - delete document fron video collectiuon
                                                            step 7) - return response
 
-7.  get updio by id :
-                                                           step 1) - take id from url
-                                                           step 2) - find video using find by id from collection
-                                                           step 3) - return response
+6.  get updio by id :
+    step 1) - take id from url
+    step 2) - find video using find by id from collection
+    step 3) - return response
 
-8.  change the publice status of video :
-9.  
-                                                           step 1) - take video id from url
+7.  change the publice status of video :
+8.                                                                                           step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
                                                            step 5) - return response
 
-10.  get all video in one take pass 10 video and sorted order :
-11.  
-                                                           step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
-                                                           step 2) - create pipline
-                                                           step 3) - push query
-                                                           step 4) - check user id vaild or not
-                                                           step 5) - if valid then push in pipline and match with user id
-                                                           step 6) - fetch video which status is true
-                                                           step 7) - sort according to sortBy, sortType
-                                                           step 8) - now aggregate all video in pipline
-                                                           step 9) - create option
-                                                           step 10) - paginate according to aggregate video
-                                                           step 11) - return response
+9.  get all video in one take pass 10 video and sorted order :
+10.                                                       step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
+                                                          step 2) - create pipline
+                                                          step 3) - push query
+                                                          step 4) - check user id vaild or not
+                                                          step 5) - if valid then push in pipline and match with user id
+                                                          step 6) - fetch video which status is true
+                                                          step 7) - sort according to sortBy, sortType
+                                                          step 8) - now aggregate all video in pipline
+                                                          step 9) - create option
+                                                          step 10) - paginate according to aggregate video
+                                                          step 11) - return response
 
 ##### create routr for all video controller and set in video route in app.js
 
@@ -556,3 +544,49 @@ take user id from url and findll all playlist of this uder
                         update comment
                         delete comment
                         get / find all comment on a video
+
+##### create a controller to add or create comment
+
+           create connent
+                  1. take comment from body
+                  2. take video id from URL
+                  3. check video id -> find from data base
+                  4. cretate comment document in data base
+                  5. return response
+
+##### create a controller for update comment
+
+      take comment id and new commwnt
+       and update it
+
+##### create a controller for delete comment
+
+    1. take comment id from url
+    2. check using find from DB that comment using ID
+    3. check comment owner with user id
+    4. delete
+    5. return response
+
+##### cretae a controller for -> find all comment in a video
+
+       1. take Video id from url
+       2. page and limit from query
+       3. find video from DB using ID
+       4. write pipline aggregration from comment Model or collection->
+                             all comment of this video
+                             find which user commented
+                             no of like in take comment
+                             add field and project
+
+##### Router for Comment controller
+
+      -> in comment.Router.js
+
+# Tweet controller
+
+                        add  or create tweet
+                        update tweet
+                        delete tweet
+                        get / find all tweet of a user
+
+                         its work is simillar to comment controller
