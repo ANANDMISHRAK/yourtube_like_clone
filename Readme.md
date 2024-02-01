@@ -8,49 +8,56 @@ yet finilazed Database, Data-Modeling, require Software.
 
 ![image](./Public/temp/DataModelingImage.png)
 
+Lik of data Model | [Data Model](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
+
 # Technologies Used
 
 Node.js
+
 Express.js
+
 MongoDB
+
 Cloudinary
 
 -----------Day:- 01 -------------------------
 
 # Day-01
 
-1)create main forder : Youtube_like_clone_Project
-2)under above folder, create folder: Backebd
-3)backend folder open in VS Code
-in vs Code terminal : 1) check Node -v 2) instal NPM init -y 3) create Readme.me File
+1. create main forder : Youtube_like_clone_Project
 
-    4) Set Up gitHup repo with is project :
-            in vs Termial :1) git init
-                           2) git add .
-                           3) git commit -m"add initial file foldet"
-                           4)create repo in github
-                           5)branch change: git branch -M main
-                           6)in terminal: set remote:---> Copy from github repo
-                           7)Push > git push -u origin main  --> copy from githyb repo
+2. under above folder, create folder Which name is: Backend
 
-    5) Make Folder in Backend: Public
-         1> under Public folder: create folder: temp
-         2> under temp folder: create file : .gitkeep -> for git track this public and temp folder
+3. backend folder open in VS Code
 
-    6) create .gitignore file in Backend folder
-    7) Create SRC folder in Backend Folder
-          under SERC Folder create file : 1) app.js
-                                          2) constants.js
-                                          3) index.js
-                                           create thia using -> touch app.js like this
+- in vs Code terminal :
+  - check Node -v
+  - instal NPM init -y
+  - create Readme.me File
 
-    8) Now work on Package.json file
-          1) for Import syntex : chanke in package.josn: -->  (in description) Type: "module'
-          2) for run server install nodemon (npm i -D nodemon)
-              in script --> "dev": "nodemon src/index.js"
-               so run server using : npm run dev
+4. Set Up gitHup repo with is project :
+   in vs Termial :1) git init 2) git add . 3) git commit -m"add initial file foldet"
+   4)create repo in github
+   5)branch change: git branch -M main
+   6)in terminal: set remote:---> Copy from github repo
+   7)Push > git push -u origin main --> copy from githyb repo
 
-     --------------------- -------------------------------------
+5. Create Folder in Backend which name is: Public
+   1> under Public folder: create folder which name is: temp
+   2> under temp folder: create file : .gitkeep -> for git track this public and temp folder
+
+6. create .gitignore file in Backend folder
+7. Create SRC folder in Backend Folder
+   under SRC Folder create file : 1) app.js 2) constants.js 3) index.js
+   create thia using -> touch app.js like this
+
+8. Now work on Package.json file
+   1. for Import syntex : chanke in package.josn: --> (in description) Type: "module'
+   2. for run server install nodemon (npm i -D nodemon)
+      in script --> "dev": "nodemon src/index.js"
+      so run server using : npm run dev
+
+---
 
 # Day-2
 
@@ -422,7 +429,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 6) - return response
 
 2.  Update Video title , description , and thumbnail :
-3.                                                                                                       step 1)- take videoId from url
+3.                                                                                                              step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
                                                            step 4) - if video all about from collention DB in Video
@@ -433,7 +440,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 9) - return response
 
 4.  delete video operation :
-5.                                                                                                       step 1) - take video id from url
+5.                                                                                                              step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
                                                            step 4) - now delete video from cloudinary
@@ -447,7 +454,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
     step 3) - return response
 
 7.  change the publice status of video :
-8.                                                                                                       step 1) - take video id from url
+8.                                                                                                              step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
