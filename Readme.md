@@ -8,7 +8,7 @@ yet finilazed Database, Data-Modeling, require Software.
 
 ![image](./Public/temp/DataModelingImage.png)
 
-Lik of data Model | [Data Model](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
+Link of data Model | [Data Model](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
 
 # Technologies Used
 
