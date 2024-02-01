@@ -36,75 +36,85 @@ Cloudinary
   - create Readme.me File
 
 4. Set Up gitHup repo with is project :
-   in vs Termial :1) git init 2) git add . 3) git commit -m"add initial file foldet"
-   4)create repo in github
-   5)branch change: git branch -M main
-   6)in terminal: set remote:---> Copy from github repo
-   7)Push > git push -u origin main --> copy from githyb repo
+
+   - in vs Termial
+     - 1. git init
+     - 2. git add .
+     - 3. git commit -m"add initial file foldet"
+     - 4. create repo in github
+     - 5. branch change: git branch -M main
+     - 6. in terminal: set remote:---> Copy from github repo
+     - 7. Push > git push -u origin main --> copy from githyb repo
 
 5. Create Folder in Backend which name is: Public
-   1> under Public folder: create folder which name is: temp
-   2> under temp folder: create file : .gitkeep -> for git track this public and temp folder
+
+   - 1> under Public folder: create folder which name is: temp
+   - 2> under temp folder: create file : .gitkeep -> for git track this public and temp folder
 
 6. create .gitignore file in Backend folder
 7. Create SRC folder in Backend Folder
-   under SRC Folder create file : 1) app.js 2) constants.js 3) index.js
-   create thia using -> touch app.js like this
+
+   - under SRC Folder create file :
+     - 1. app.js
+     - 2. constants.js
+     - 3. index.js
+   - create thia using -> touch app.js like this
 
 8. Now work on Package.json file
-   1. for Import syntex : chanke in package.josn: --> (in description) Type: "module'
-   2. for run server install nodemon (npm i -D nodemon)
-      in script --> "dev": "nodemon src/index.js"
-      so run server using : npm run dev
+   - 1. for Import syntex : chanke in package.josn: --> (in description) Type: "module'
+   - 2. for run server install nodemon (npm i -D nodemon)
+   * in script --> "dev": "nodemon src/index.js"
+   * so run server using : npm run dev
 
 ---
 
 # Day-2
 
-    9) Set Folder in SRC Folder :
-                                1) create folder Controller
-                                2) create folder db
-                                3) create folder middlewares
-                                4) create folder models
-                                5) create folder routes
-                                6) create folder utils (file upload , mail statics process code likhe)
+9.  Set Folder in SRC Folder :
 
-    10) now instail Prittier -> for code -> clean and design ->  npm i -D prettier
+    - 1. create folder Controller
+    - 2. create folder db
+    - 3. create folder middlewares
+    - 4. create folder models
+    - 5. create folder routes
+    - 6. create folder utils (file upload , mail statics process code likhe)
 
-       10.1) create .Prettierrc filr in main folder :
-                                                      {
-                                                        "singleQuote": false,
-                                                        ..
-                                                        ..
-                                                        so on
-                                                      }
-       10.2) create .prettierignore : in which write file name where prittier not work
-            likr:   - .env
-            node_modules
+10. now instail Prittier -> for code -> clean and design -> npm i -D prettier
 
-    11) now Connect with Database
-         11.1) MongoDB Atlas  i have account then -> go in db -> connect -> mongoDB Compass then copy url
-               and pest in .env : MONGODB_URL : pest here
+    - 10.1) create .Prettierrc filr in main folder :
+      {
+      "singleQuote": false,
+      ..
+      ..
+      so on
+      }
+    - 10.2) create .prettierignore : in which write file name where prittier not work
+      - likr: - .env
+      - node_modules
 
-               before it instail .env: npm i dotenv
+11. now Connect with Database
+    - 11.1) MongoDB Atlas i have account then -> go in db -> connect -> mongoDB Compass then copy url
+      and pest in .env : MONGODB_URL : pest here
 
-         11.2) in src-> constants.js me set DB name
-                                            like DB_Name="Youtube"
+** before it instail .env: npm i dotenv **
 
-    12) install express & mogoose
-         npm i express, mongoose
-    13) congiggure dotenv in index.js
+- 11.2) in src-> constants.js me set DB name
 
-    14) now Write logics for Db connection in Src-> dbConnection-> dbConnection.js
-        and export
-    15) import db in configgure or call in index.js
+           like DB_Name="Youtube"
 
-    16) in Package.json : in script: dev change to run so .env, and all extension load
-         check work or not : npm run dev
+12. install express & mogoose
+    - npm i express, mongoose
+13. congiggure dotenv in index.js
 
-    17) db successfull conecot ho gya hai but usse kisi port pe listion nhi kiye hai
-      to ab:
-            index.js me kre : connectionDB() prommise return krta hai: app.js use kr rhe to import kre index.js
+14. now Write logics for Db connection in Src-> dbConnection-> dbConnection.js
+    and export
+15. import db in configgure or call in index.js
+
+16. in Package.json : in script: dev change to run so .env, and all extension load
+    check it work or not : npm run dev
+
+17. db successfull connrct with Backend but yet not host i.e. not listen -> so listen it
+    - index.js me kre : connectionDB() prommise return krta hai: app.js use kr rhe to import kre index.js
 
 ---
 
@@ -112,71 +122,83 @@ Cloudinary
 
 ### Today Agenda
 
-write middleware start in app.js cors, use
+write build in middleware in app.js , like cros, use
+
 Write the class sentex of Responce send Error send
 
-    18 ) in app.js ---> npm i cookie-parser, cors
-              18.1) install cors -> for kaha kaha se es backend pe request aa skta hai
-              18.2) .use(express.json())-> json , json form se data aa skta hai backed me
-              18.3) .use(express.urlencoded())--> url se data aa skta hai
-              18.4) .use(express.static("folder name))->>> koe static folder ko kahai hai
-              18.5) .use(cookieParser())-> cookie send krne ke liye
+18. in app.js ---> npm i cookie-parser, cors
 
-     19) in src-> utils-> asyncHandler.js
-         for formet to resulbe function -> baar baar DB connection ke liye
+    - 18.1) install cors -> for kaha kaha se es backend pe request aa skta hai
+    - 18.2) .use(express.json())-> json , json form se data aa skta hai backed me
+    - 18.3) .use(express.urlencoded())--> url se data aa skta hai
+    - 18.4) .use(express.static("folder name))->>> koe static folder ko kahai hai
+    - 18.5) .use(cookieParser())-> cookie send krne ke liye
 
-     20) write class for error return syntex
-        in src-> utils-> ApiError.js
-          write class and constecter
+19. in src-> utils-> asyncHandler.js
 
-     21) write the syntex for Api Response
-         in srx-> utils-> ApiResponse.js
+    - for formet to callBack function -> baar baar DB connection ke liye
+
+20. write class for error return syntex
+
+    - in src-> utils-> ApiError.js
+    - write class and constecter
+
+21. write the syntex for Api Response
+    - in srx-> utils-> ApiResponse.js
 
 # Day-04
 
 ### Today Agenda : now Start real Development of this Project
 
-     Create Model Its logic
+     Create Model & Its logic
 
-     22) Create User Model ---> in Src->Model--> user.model.js
-         in user model :-> (userName, email, fullName, password, avatar, coverImage, refreshToken, accessTocken, UpdateTimes, WatchHistory)
-         in which---> watchHistory count from Video Scheema model
+22. Create User Model ---> in Src->Model--> user.model.js
 
-         coverImage and avatar not sore in Backend -> sore in other storage like Cloudnary or Amozone
-         in Backend Database-> store address of image or video
+    - in user model :-> (userName, email, fullName, password, avatar, coverImage, refreshToken, accessTocken,
+      UpdateTimes, WatchHistory)
+    - in which---> watchHistory count from Video Scheema model
 
-          for create model need mongoose and Schema.
+    - coverImage and avatar not sore in Backend -> sore in other storage like Cloudnary or Amozone
+      in Backend Database-> store address of image or video
 
-     23) create Video model Scheema under Src-> models-> video.models.js
-         (videofile, thumbnail, title, description, duration, view, isPublished, owner--> from user)
+    - for create model need mongoose and Schema.
 
-     24) for DB query -> write mongoDB  aggregate pipline
-         for this ---> npm i mongoose-aggregate-paginate-v2
+23. create Video model Scheema under Src-> models-> video.models.js
 
-         for password security ----> use bcrypt
-            this ----> npm i bcrypt
+    - (videofile, thumbnail, title, description, duration, view, isPublished, owner--> from user)
 
-          for token jwt---> npm i jsonwebtoken
-           token use tile key---> jo token dega usse information deunga
-            token have 3 part:
-                 1) header ::-> algoritm type
-                 2) payload data :::-> information what you want share
-                 3) verify signature and secret base encode ----> for verification of user.
+24. for DB query -> write mongoDB aggregate pipline
 
-    25) befor save user iformation bcrypt the password
-       for this in user.model.js -> use pre middleware
-        thus middleware take 2 paramere 1)Event 2)callback function
-        before the Event execute the callback function the event work
+    - for this ---> npm i mongoose-aggregate-paginate-v2
 
-    26) at sign in time we need to compair password
-        so user put is original password and in DB have bcrupted password
-        so compaire with the hepl od bcript model
-        in user.model.js ----> write method for it ----->
+    - for password security ----> use bcrypt
 
-    27) for Token
-        27.1) generate acces Token usint method using JWT
-        27.2) generate refresh Token using method using JWT
-        in user.model.js
+      - this ----> npm i bcrypt
+
+    - for token jwt---> npm i jsonwebtoken
+      - token use tile key---> jo token dega usse information deunga
+      - token have 3 part:
+        - 1.  header ::-> algoritm type
+        - 2.  payload data :::-> information what you want share
+        - 3.  verify signature and secret base encode ----> for verification of user.
+
+25. befor save user iformation bcrypt the password
+    - for this in user.model.js -> use pre middleware
+    - this middleware take 2 paramere
+      - 1. Event
+      - 2. callback function
+    - before the Event execute the callback function the event work
+
+26) at sign in time we need to compair password
+
+    - so user put is original password and in DB have bcrupted password
+    - so compaire with the hepl od bcript model
+    - in user.model.js ----> write method for it ----->
+
+27) for Token
+    - 27.1) generate acces Token usint method using JWT
+    - 27.2) generate refresh Token using method using JWT
+    - in user.model.js
 
 # Day-05
 
@@ -191,29 +213,30 @@ Write the class sentex of Responce send Error send
     if successfullay upload or not then delete from Backend this photo or Video using FS module of express
     :-
 
-    28.1) install MULTER : npm i multer
-    28.2) signup or login in clounary (sign up ---> free version use ------> set up : node.js)
-    28.3) after account creation --> cloudnary install in backend : npm i cloudinary
-    28.4) copy cloudName , API secret from cloudnary and pest in .env file
+- 28.1) install MULTER : npm i multer
+- 28.2) signup or login in clounary (sign up ---> free version use ------> set up : node.js)
+- 28.3) after account creation --> cloudnary install in backend : npm i cloudinary
+- 28.4) copy cloudName , API secret from cloudnary and pest in .env file
 
-    these 29.2,3,4 is Backend to clounary
-    now local system to Backend
-    28.5) in SRC->MIDDLEWARE -> multer.middleware.js
-    write middleware for local to Backend
+** these 29.2,3,4 is Backend to clounary**
+
+- now local system to Backend
+- 28.5) in SRC->MIDDLEWARE -> multer.middleware.js
+  write middleware for local to Backend
 
 ###### Routing and Conroller
 
-: 29) wite Rouring and Controller
+29. wite Rouring and Controller
 
-     29.1)  creATE FILE IN src -> ROUTES-> USER.ROUTE.JS
-           CONFIGURE
-           EXPORT
-           IMPORT IN APP.JS
-           SET IN APP.JS THE ROUTE
+    - 29.1) create FILE IN src -> ROUTES-> USER.ROUTE.JS
+      - CONFIGURE
+      - EXPORT
+      - IMPORT IN APP.JS
+      - SET IN APP.JS THE ROUTE using buieldin middleware "use()"
 
 30. set router for user sig in process:-
-    30.1) for sign in time need to upload image avtar & cover image so need multer and cloudminary middleware then gives to controller to sign in
-    30.2) and write controller for sigin in in src-> controller-> userController.js
+    - 30.1) for sign in time need to upload image avtar & cover image so need multer and cloudminary middleware then gives to controller to sign in
+    - 30.2) and write controller for sigin in in src-> controller-> userController.js
 
 31) testing user sign in controller in POSTMAN in body in form-data
     Error got : throw new ApiError(...) not work due to this is throw error but i did not handle in catch block
@@ -223,15 +246,16 @@ Write the class sentex of Responce send Error send
 
 ##### Agenda :- LOG-IN
 
-31. login controller  
-     31.1) take data fron Body {username, email}
-    31.2) validate data userName & email
-    31.3) find from DB
-    31.4) if not find then throw Error
-    31.5) now check password
-    31.6) access & Refresh Token Generate and send to user
-    31.7) send throw cookise
-    31.8) send response
+31. login controller
+
+    - 31.1) take data fron Body {username, email}
+    - 31.2) validate data userName & email
+    - 31.3) find from DB
+    - 31.4) if not find then throw Error
+    - 31.5) now check password
+    - 31.6) access & Refresh Token Generate and send to user
+    - 31.7) send throw cookise
+    - 31.8) send response
 
 32. write router using Post method for login
 
@@ -429,7 +453,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 6) - return response
 
 2.  Update Video title , description , and thumbnail :
-3.                                                                                                              step 1)- take videoId from url
+3.                                                                                                                            step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
                                                            step 4) - if video all about from collention DB in Video
@@ -440,7 +464,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 9) - return response
 
 4.  delete video operation :
-5.                                                                                                              step 1) - take video id from url
+5.                                                                                                                            step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
                                                            step 4) - now delete video from cloudinary
@@ -454,7 +478,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
     step 3) - return response
 
 7.  change the publice status of video :
-8.                                                                                                              step 1) - take video id from url
+8.                                                                                                                            step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
