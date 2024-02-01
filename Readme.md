@@ -496,17 +496,18 @@ if log in then start to work in controller :
     - step 5) - return response
 
 6.  get all video in one take pass 10 video and sorted order :
-    -      step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
-    -      step 2) - create pipline
-    -      step 3) - push query
-    -      step 4) - check user id vaild or not
-    -      step 5) - if valid then push in pipline and match with user id
-    -      step 6) - fetch video which status is true
-    -      step 7) - sort according to sortBy, sortType
-    -      step 8) - now aggregate all video in pipline
-    -      step 9) - create option
-    -      step 10) - paginate according to aggregate video
-    -      step 11) - return response
+
+    - step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
+    - step 2) - create pipline
+    - step 3) - push query
+    - step 4) - check user id vaild or not
+    - step 5) - if valid then push in pipline and match with user id
+    - step 6) - fetch video which status is true
+    - step 7) - sort according to sortBy, sortType
+    - step 8) - now aggregate all video in pipline
+    - step 9) - create option
+    - step 10) - paginate according to aggregate video
+    - step 11) - return response
 
 ##### create routr for all video controller and set in video route in app.js
 
@@ -517,12 +518,12 @@ if log in then start to work in controller :
 **controller name:**
 
 - create playlist
--      add video to playlist
--      remove video from playlist
--      get playlist by id
--      get user playlist
--      update playlist
--      delete playlist
+  - add video to playlist
+  - remove video from playlist
+  - get playlist by id
+  - get user playlist
+  - update playlist
+  - delete playlist
 
 ###### createPlaylist controller
 
@@ -530,62 +531,62 @@ Only create playlist in which not have video now : 1. take name & description of
 
 ##### create addVideoToPlaylist
 
-      only admin i.e. owner of playlist add video , which uploaded by self video
+only admin i.e. owner of playlist add video , which uploaded by self video
 
-         1. take playlistId and videoId from url
-         2. find playlist and video from DB
-         3. check user is correct to add in this playlist
-         4. update that playlist document
-         5.return response
+- 1.  take playlistId and videoId from url
+- 2.  find playlist and video from DB
+- 3.  check user is correct to add in this playlist
+- 4.  update that playlist document
+- 5.  return response
 
 ##### create removeVideo from playlist
 
-        only owner of playlist remove video from playlist
+only owner of playlist remove video from playlist
 
-        1. tale videoid and playlist id from url
-        2.  find video and playlist from DB
-        3.  check user Authorized to this work or not
-        4. update document using PULL operation in db
-        5. return response
+- 1. tale videoid and playlist id from url
+- 2.  find video and playlist from DB
+- 3.  check user Authorized to this work or not
+- 4. update document using PULL operation in db
+- 5. return response
 
 ##### create get playlist by id controller
 
-     any user can find playlist by id and see all video of that playlist and playlist description & name
+any user can find playlist by id and see all video of that playlist and playlist description & name
 
-       1. take playlist id from url
-       2. find playlist from DB
-       3. write pipeline aggregration in playlist model -> all video , all things of owner of video
-       4. return response
+- 1. take playlist id from url
+- 2. find playlist from DB
+- 3. write pipeline aggregration in playlist model -> all video , all things of owner of video
+- 4. return response
 
 ##### create get user playlist
 
 take user id from url and findll all playlist of this uder
 
-      1. take user id from url
-      2. find user from DB
-      3. now write pipeline aggregratin in playlist which owner match with user id
-      4. return response
+- 1. take user id from url
+- 2. find user from DB
+- 3. now write pipeline aggregratin in playlist which owner match with user id
+- 4. return response
 
 ##### create update playlist controller
 
-     owner of this playlist can update title and description of this playlist
+owner of this playlist can update title and description of this playlist
 
-        1. take playlist id from url
-        2. take title and description from body
-        3. find playlist through ID
-        4. check user id Authorized for this work or not
-        5. update
-        6. return response
+- 1. take playlist id from url
+- 2. take title and description from body
+- 3. find playlist through ID
+- 4. check user id Authorized for this work or not
+- 5. update
+- 6. return response
 
 ##### create delete Playlist controller
 
-      owner of this playllist delete the playlist
+owner of this playllist delete the playlist
 
-       1. take playlist if from url
-       2. find Playlist document from DB
-       3. check user is Authorized
-       4. delete from Collection
-       5.  return response
+- 1.  take playlist if from url
+- 2.  find Playlist document from DB
+- 3.  check user is Authorized
+- 4.  delete from Collection
+- 5.  return response
 
 ###### write router for respective all controller for Playlist
 
@@ -593,25 +594,27 @@ take user id from url and findll all playlist of this uder
 
 #### Now work on Comment controller
 
-     Name of controller:
-                        add comment , or create comment
-                        update comment
-                        delete comment
-                        get / find all comment on a video
+Name of controller:
+
+- add comment , or create comment
+- update comment
+- delete comment
+- get / find all comment on a video
 
 ##### create a controller to add or create comment
 
-           create connent
-                  1. take comment from body
-                  2. take video id from URL
-                  3. check video id -> find from data base
-                  4. cretate comment document in data base
-                  5. return response
+create connent
+
+- 1.  take comment from body
+- 2.  take video id from URL
+- 3.  check video id -> find from data base
+- 4.  cretate comment document in data base
+- 5.  return response
 
 ##### create a controller for update comment
 
-      take comment id and new commwnt
-       and update it
+take comment id and new comment
+and update it
 
 ##### create a controller for delete comment
 
@@ -623,14 +626,14 @@ take user id from url and findll all playlist of this uder
 
 ##### cretae a controller for -> find all comment in a video
 
-       1. take Video id from url
-       2. page and limit from query
-       3. find video from DB using ID
-       4. write pipline aggregration from comment Model or collection->
-                             all comment of this video
-                             find which user commented
-                             no of like in take comment
-                             add field and project
+1. take Video id from url
+2. page and limit from query
+3. find video from DB using ID
+4. write pipline aggregration from comment Model or collection->
+   - all comment of this video
+   - find which user commented
+   - no of like in take comment
+   - add field and project
 
 ##### Router for Comment controller
 
@@ -638,30 +641,29 @@ take user id from url and findll all playlist of this uder
 
 # Tweet controller
 
-                        add  or create tweet
-                        update tweet
-                        delete tweet
-                        get / find all tweet of a user
+add or create tweet
+update tweet
+delete tweet
+get / find all tweet of a user
 
-                         its work is simillar to comment controller
+its work is simillar to comment controller
 
 # Day -12
 
 ## Subscription Controller
 
-         1. toggleSubscription
-         2. get user channel Subscribers
-         3. get all subscribed channel by user
+1.  toggleSubscription
+2.  get user channel Subscribers
+3.  get all subscribed channel by user
 
 ## Like controller
 
-                    1 toggle Video like
-                    2 toggle comment like
-                    3 toggle tweet like
-                    4 find total like of a video
-                    5 find total like of a comment
-                    6 find total like of a tweet
-
+1.  toggle Video like
+2.  toggle comment like
+3.  toggle tweet like
+4.  find total like of a video
+5.  find total like of a comment
+6.  find total like of a tweet
 
              logic of all simillar to Subscription controller
 
