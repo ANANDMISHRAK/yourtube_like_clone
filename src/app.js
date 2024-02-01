@@ -6,6 +6,9 @@ import videoRouter from './routes/video.router.js'
 import platlistRouter from './routes/playlist.router.js'
 import commentRouter from './routes/comment.router.js'
 import tweetRouter from './routes/tweet.router.js'
+import subscriptionRouter from './routes/subscription.router.js'
+import likeRouter from './routes/like.router.js'
+import dashboardRouter from './routes/dashboard.router.js'
 
 const app = express()
 
@@ -30,6 +33,9 @@ app.use('/api/v1/video', videoRouter)
 app.use('/api/v1/playlist', platlistRouter)
 app.use('/api/v1/comment', commentRouter)
 app.use('/api/v1/tweet', tweetRouter)
+app.use('/api/v1/subsc', subscriptionRouter)
+app.use('/api/v1/like', likeRouter)
+app.use('/api/v1/dashboard', dashboardRouter)
 
 
 export {app}

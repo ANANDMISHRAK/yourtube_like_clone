@@ -410,7 +410,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 6) - return response
 
 2.  Update Video title , description , and thumbnail :
-3.                                                                                           step 1)- take videoId from url
+3.                                                                                                  step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
                                                            step 4) - if video all about from collention DB in Video
@@ -421,7 +421,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 9) - return response
 
 4.  delete video operation :
-5.                                                                                           step 1) - take video id from url
+5.                                                                                                  step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
                                                            step 4) - now delete video from cloudinary
@@ -435,7 +435,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
     step 3) - return response
 
 7.  change the publice status of video :
-8.                                                                                           step 1) - take video id from url
+8.                                                                                                  step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
@@ -590,3 +590,30 @@ take user id from url and findll all playlist of this uder
                         get / find all tweet of a user
 
                          its work is simillar to comment controller
+
+# Day -12
+
+## Subscription Controller
+
+         1. toggleSubscription
+         2. get user channel Subscribers
+         3. get all subscribed channel by user
+
+## Like controller
+
+                    1 toggle Video like
+                    2 toggle comment like
+                    3 toggle tweet like
+                    4 find total like of a video
+                    5 find total like of a comment
+                    6 find total like of a tweet
+
+
+             logic of all simillar to Subscription controller
+
+## Dashboard conreoller
+
+get data from of user show on profile page
+
+         1. get channel ststs
+         2. get channel video
