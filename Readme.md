@@ -265,15 +265,14 @@ Write the class sentex of Responce send Error send
 
 33. Log Out Controller in User.controller.js
 
-                          33.1) user is login or not check using middleWare -> auth.middleware.js--> method name verifyJWT
-                          33.2) if user is log in then find access token via Cookies , colies get from req.cookies or req.header
-                          33.3) if got access token then decode this token
-                          33.4) by help of decoded token have user detels , so find user information from DB by help of user.\_id
-                          33.5) then send this user in res then call next() this (33.1,2.3.4.5) work in middlewate
-
-                          33.6) got user then now work in logout controller
-                          33.7) update refresh token of DB is undefind
-                          33.8) return response
+    - 33.1) user is login or not check using middleWare -> auth.middleware.js--> method name verifyJWT
+    - 33.2) if user is log in then find access token via Cookies , colies get from req.cookies or req.header
+    - 33.3) if got access token then decode this token
+    - 33.4) by help of decoded token have user detels , so find user information from DB by help of user.\_id
+    - 33.5) then send this user in res then call next() this (33.1,2.3.4.5) work in middlewate
+    - 33.6) got user then now work in logout controller
+    - 33.7) update refresh token of DB is undefind
+    - 33.8) return response
 
     now create Route in user.route.js-> using post method call middlewate verifyJWT then controller
 
@@ -284,54 +283,54 @@ Write the class sentex of Responce send Error send
 
     ###### step
 
-                          34.1) take Refresh Token : come from cookie -> docode it and find user from DB
-                          34.2) compair refesh Token from DB
-                          34.3) if match then generate access token
-                          34.4) send response
+    - 34.1) take Refresh Token : come from cookie -> docode it and find user from DB
+    - 34.2) compair refesh Token from DB
+    - 34.3) if match then generate access token
+    - 34.4) send response
 
 #### Update User
 
 35. change current password
 
-                          35.1) take data from req body -> oldPassword, newPassword
-                          35.2) find user all things from DB using user.\_id
-                          35.3)check given old password is match with DB password
-                          35.4) if match then update and save
-                          35.5) return response
+    - 35.1) take data from req body -> oldPassword, newPassword
+    - 35.2) find user all things from DB using user.\_id
+    - 35.3)check given old password is match with DB password
+    - 35.4) if match then update and save
+    - 35.5) return response
 
     this is in user controller
 
 36. who is current user -> send to frontend
 
-                          36.1) req.user gives who is corrent user all information at time of lofin
-                          direct send it in response
+    - 36.1) req.user gives who is current user all information at time of login
+      direct send it in response
 
     in router check login or not then controller work
 
 37. update Account like fullName, email , both or one
 
-                          37.1) take fullname and password from body
-                          37.2) find user and update from DB using req.user.\_id
-                          37.3) return response
+    - 37.1) take fullname and password from body
+    - 37.2) find user and update from DB using req.user.\_id
+    - 37.3) return response
 
 38. update Avatar Image
 
-                          38.1) take local Avatar image from req.file. path
-                          38.2) upload on cloudnariry
-                          38.3) find user from data base
-                          38.4) deletd old avatar from clodinary using db avatar path
-                          38.5) set new path of avatar in DB
-                          38.6) return response
+    - 38.1) take local Avatar image from req.file. path
+    - 38.2) upload on cloudnariry
+    - 38.3) find user from data base
+    - 38.4) deletd old avatar from clodinary using db avatar path
+    - 38.5) set new path of avatar in DB
+    - 38.6) return response
 
 39. Update Cover Image
 
-                          39.1) take local Cover Image from req.file.path
-                          39.2)find user fron req.user
-                          39.3)check , is coverImage url is present in DB (for old COVER Image) then
-                          39.3.1) yes -> then remove from clodinary user coverImage Publick id
-                          39.4) now present coverimage upload on cloudinary
-                          39.5) set and save in Database
-                          39.6) return response
+    - 39.1) take local Cover Image from req.file.path
+    - 39.2)find user fron req.user
+    - 39.3)check , is coverImage url is present in DB (for old COVER Image) then
+      - 39.3.1) yes -> then remove from clodinary user coverImage Publick id
+    - 39.4) now present coverimage upload on cloudinary
+    - 39.5) set and save in Database
+    - 39.6) return response
 
     write router in user.router.js
 
@@ -343,10 +342,11 @@ so need
 ###### create Subscription schema
 
 40. subscription schema
-    id ---> create my mongoDB
-    subscriber ---> user id from user model : -> how many people subscribe you Like Fllower
-    chanel ---> user id from user model : -> how many channel you subscribe Like Following
-    timestamps
+
+    - id ---> create my mongoDB
+    - subscriber ---> user id from user model : -> how many people subscribe you Like Fllower
+    - chanel ---> user id from user model : -> how many channel you subscribe Like Following
+      timestamps
 
 41. how to find subscriber : How many people follow you i.e. : Follower
     let a, b, c,d, e, f, g,h, i, j user on site , in which f, g, h, i, have channel -> ye video upload krta hai
@@ -390,23 +390,24 @@ so need
 
     ##### Step to find subscriber of user
 
-                                     step 1 -> subscription collection ko left join krna hoga user collection ke sath so need
-                                     aggregation pipline
-                                     step 2 -> find kis user ka subscriper find krna hai so user Name chaliye jo url se milega -> use req.params
-                                     step 3 -> write aggrigation pipline
+    - step 1 -> subscription collection ko left join krna hoga user collection ke sath so need aggregation pipline
+    - step 2 -> find kis user ka subscriper find krna hai so user Name chaliye jo url se milega -> use req.params
+    - step 3 -> write aggrigation pipline
 
-    step to use aggregation
-    step 1 -> find document from User which uaserName match -> using match operation
-    step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
-    step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
-    if local or forign match krega usse count kr lenge
+    **step to use aggregation**
 
-        similler to find How many Followung same lookup
+    - step 1 -> find document from User which uaserName match -> using match operation
+    - step 2 -> now to look into subscription model from User model , Here localField -> userID fron userModel user document jo step 1 me nikale hai
+    - step 3-> forignField - channel from subscriptin model jise look kr rhe hai , channel me user ka id hai
 
-        then Addfield se dono ko add kr lenge
+      - if local or forign match krega usse count kr lenge
 
-        in last Project kr dunga
-        and response send
+      similler to find How many Followung same lookup
+
+      then Addfield se dono ko add kr lenge
+
+      in last Project kr dunga
+      and response send
 
 # Day - 08
 
@@ -430,11 +431,18 @@ now user things is compited so move on create comment , like , tweet models
 
 ###### alll work is done , now only do write controller and is router and use in app.js
 
-write controller fails : 1. Video controller -> video.controller.js 2. subscription controller ->subscription.controller.js 3. playlist controller -> playlist.controller.js 4. comment controller 5. like controller 6. tweet controller 7. dashboard controller 8. healthcheck controller
+- write controller fails :
 
-                            respective all write router and aap.use( in app.js
+  - 1. Video controller -> video.controller.js
+  - 2. subscription controller ->subscription.controller.js
+  - 3. playlist controller -> playlist.controller.js
+  - 4. comment controller
+  - 5. like controller
+  - 6. tweet controller
+  - 7. dashboard controller
+  - 8. healthcheck controller
 
-                            )
+- respective all write router and aap.use( in app.js )
 
 # Day-09
 
@@ -443,59 +451,62 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
 1.  write video publish controller ->
     in middleware check user login or not
 
-    if log in then start to work in controller :
+if log in then start to work in controller :
 
-                                                           step 1) - take title and description fron req. body
-                                                           step 2) - take video local path and thumblin local path from req.files.video[0].path simillar to thumblin
-                                                           step 3) - now upload both on cloudnary
-                                                           step 4) - create user
-                                                           step 5) - check created or not
-                                                           step 6) - return response
+    - step 1) - take title and description fron req. body
+    - step 2) - take video local path and thumblin local path from req.files.video[0].path simillar to thumblin
+    - step 3) - now upload both on cloudnary
+    - step 4) - create user
+    - step 5) - check created or not
+    - step 6) - return response
 
 2.  Update Video title , description , and thumbnail :
-3.                                                                                                                            step 1)- take videoId from url
-                                                           step 2) - take title, description from body
-                                                           step 3) - take thumbnail from file
-                                                           step 4) - if video all about from collention DB in Video
-                                                           step 5) - check video.owner is eualt to user.\_id - user from req.user
-                                                           step 6) - now thumbnail upload on cloudinary
-                                                           step 7) - delete old thumbnail
-                                                           step 8) - now findbyidAndUpdate
-                                                           step 9) - return response
 
-4.  delete video operation :
-5.                                                                                                                            step 1) - take video id from url
-                                                           step 2) - find video from collection
-                                                           step 3) - check video owner is equal to user id , user from req. user
-                                                           step 4) - now delete video from cloudinary
-                                                           step 5) - delete thumbnail from cloudinary
-                                                           step 6) - delete document fron video collectiuon
-                                                           step 7) - return response
+    - step 1)- take videoId from url
+    - step 2) - take title, description from body
+    - step 3) - take thumbnail from file
+    - step 4) - if video all about from collention DB in Video
+    - step 5) - check video.owner is eualt to user.\_id - user from req.user
+    - step 6) - now thumbnail upload on cloudinary
+    - step 7) - delete old thumbnail
+    - step 8) - now findbyidAndUpdate
+    - step 9) - return response
 
-6.  get updio by id :
-    step 1) - take id from url
-    step 2) - find video using find by id from collection
-    step 3) - return response
+3.  delete video operation :
 
-7.  change the publice status of video :
-8.                                                                                                                            step 1) - take video id from url
-                                                           step 2) - find video from DB accoding video id
-                                                           step 3) - check user id is equal to video owner
-                                                           step 4) - now update status
-                                                           step 5) - return response
+    - step 1) - take video id from url
+    - step 2) - find video from collection
+    - step 3) - check video owner is equal to user id , user from req. user
+    - step 4) - now delete video from cloudinary
+    - step 5) - delete thumbnail from cloudinary
+    - step 6) - delete document fron video collectiuon
+    - step 7) - return response
 
-9.  get all video in one take pass 10 video and sorted order :
-10.                                                       step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
-                                                          step 2) - create pipline
-                                                          step 3) - push query
-                                                          step 4) - check user id vaild or not
-                                                          step 5) - if valid then push in pipline and match with user id
-                                                          step 6) - fetch video which status is true
-                                                          step 7) - sort according to sortBy, sortType
-                                                          step 8) - now aggregate all video in pipline
-                                                          step 9) - create option
-                                                          step 10) - paginate according to aggregate video
-                                                          step 11) - return response
+4.  get updio by id :
+
+    - step 1) - take id from url
+    - step 2) - find video using find by id from collection
+    - step 3) - return response
+
+5.  change the publice status of video : - step 1) - take video id from url
+
+    - step 2) - find video from DB accoding video id
+    - step 3) - check user id is equal to video owner
+    - step 4) - now update status
+    - step 5) - return response
+
+6.  get all video in one take pass 10 video and sorted order :
+    -      step 1) - take query , sortBy , sortType userid , limit=10, page=1 from req.query
+    -      step 2) - create pipline
+    -      step 3) - push query
+    -      step 4) - check user id vaild or not
+    -      step 5) - if valid then push in pipline and match with user id
+    -      step 6) - fetch video which status is true
+    -      step 7) - sort according to sortBy, sortType
+    -      step 8) - now aggregate all video in pipline
+    -      step 9) - create option
+    -      step 10) - paginate according to aggregate video
+    -      step 11) - return response
 
 ##### create routr for all video controller and set in video route in app.js
 
@@ -503,15 +514,15 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
 
 ##### Now work in PayList Controller, routing
 
-controller name:
+**controller name:**
 
-                    create playlist
-                    add video to playlist
-                    remove video from playlist
-                    get playlist by id
-                    get user playlist
-                    update playlist
-                    delete playlist
+- create playlist
+-      add video to playlist
+-      remove video from playlist
+-      get playlist by id
+-      get user playlist
+-      update playlist
+-      delete playlist
 
 ###### createPlaylist controller
 
