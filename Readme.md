@@ -6,7 +6,7 @@ yet finilazed Database, Data-Modeling, require Software.
 
 ### DataBase Designing , and modeling
 
-![image](../DataModelingImage.png)
+![image](./Public/temp/DataModelingImage.png)
 
 # Technologies Used
 
@@ -422,7 +422,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 6) - return response
 
 2.  Update Video title , description , and thumbnail :
-3.                                                                                                      step 1)- take videoId from url
+3.                                                                                                       step 1)- take videoId from url
                                                            step 2) - take title, description from body
                                                            step 3) - take thumbnail from file
                                                            step 4) - if video all about from collention DB in Video
@@ -433,7 +433,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
                                                            step 9) - return response
 
 4.  delete video operation :
-5.                                                                                                      step 1) - take video id from url
+5.                                                                                                       step 1) - take video id from url
                                                            step 2) - find video from collection
                                                            step 3) - check video owner is equal to user id , user from req. user
                                                            step 4) - now delete video from cloudinary
@@ -447,7 +447,7 @@ write controller fails : 1. Video controller -> video.controller.js 2. subscript
     step 3) - return response
 
 7.  change the publice status of video :
-8.                                                                                                      step 1) - take video id from url
+8.                                                                                                       step 1) - take video id from url
                                                            step 2) - find video from DB accoding video id
                                                            step 3) - check user id is equal to video owner
                                                            step 4) - now update status
