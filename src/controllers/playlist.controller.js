@@ -67,7 +67,10 @@ const addVideoInPlaylist = asyncHandler(async(req, res)=>{
             throw new ApiError(401, "Video Id is Invalid!")  
          }
       // now check user id Authorized or not this work
-      if(playlist.owner !== req.user?._id || video.owner !== req.user?._id)
+      console.log(playlist.owner)
+      console.log(req.user?._id)
+      console.log(video.owner)
+      if(playlist.owner.toString() !== req.user?._id.toString() || video.owner.toString() !== req.user?._id.toString())
       {
         throw new ApiError(401," user does not Azuthorized this work")
       }
@@ -107,7 +110,7 @@ const removeVideoFromPlaylist = asyncHandler(async(req, res)=>{
     try{
          // take id from url
          const {videoId, playlistId}= req.params
-
+  //console.log("get data from url")
          if(!videoId || !playlistId)
          {
             throw new ApiError(401, " video and playlist Id must be required")
@@ -118,30 +121,31 @@ const removeVideoFromPlaylist = asyncHandler(async(req, res)=>{
          {
             throw new ApiError(401, "Video ID is invalid!")
          }
+         console.log("video finded")
          const playlist = await Playlist.findById(playlistId)
          if(!playlist)
          {
             throw new ApiError(401, "Playlist id is invalid")
          }
-
+    // console.log("finded playlist and video from db")
          // check user Authorized or not
-         if(playlist.owner !== req.user?._id || video.owner !== req.user?._id)
+         if(playlist.owner.toString() !== req.user?._id.toString() || video.owner.toString() !== req.user?._id.toString())
          {
            throw new ApiError(401," user does not Azuthorized this work")
          }
-
+ // console.log("noe go to remove")
          // remove from DB
          const removeVideo = await Playlist.findByIdAndUpdate( playlistId,
                                                                {
                                                                  $pull: {
-                                                                          videos: videoId
+                                                                         videos: videoId,
                                                                         }
                                                                } ,
                                                                {
                                                                 new : true
                                                                }                              
                                                              );
-
+ console.log(removed)
         if(!removeVideo)
         {
             throw new ApiError(401, "Somethings went wrong")

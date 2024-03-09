@@ -10,7 +10,7 @@ import { addComment,
 
 const router = express.Router()
 // add or create comment
-router.route('/add').post(verifyJWT, addComment)
+router.route('/add/:videoId').post(verifyJWT, addComment)
 
 // update comment
 router.route('/update/:commentId').patch(verifyJWT, updateComment)

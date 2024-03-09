@@ -673,3 +673,10 @@ get data from of user show on profile page
 
          1. get channel ststs
          2. get channel video
+
+# node Scaling using CLUSTER
+
+write code in primary.js
+run : npm run dev
+instal loadtest for testing load
+run loadtest : npx loadtest -n 1200 -c 400 -k http://loacalhost:8000

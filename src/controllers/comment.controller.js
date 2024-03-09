@@ -114,16 +114,16 @@ const deleteComment = asyncHandler(async(req, res)=>{
           {
             throw new ApiError(401, " Comment Id must be required")
           }
-
+ console.log("go for find connent db")
           // find comment document from DB
           const comment = await Comment.findById(commentId)
           if(!comment)
           {
             throw new ApiError(401, " Comment Id is Invalid!")
           }
-
+console.log("comment finded from db")
           // check user is Authorized 
-          if(comment.owner.toString() !== req.user?._id)
+          if(comment.owner.toString() !== req.user?._id.toString())
           {
             throw new ApiError(401, "User is Unauthorized")
           }

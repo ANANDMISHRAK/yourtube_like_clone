@@ -318,11 +318,13 @@ const deleteVideo = asyncHandler(async (req, res) => {
       }
 
       // now delete thumbnail and video
+       console.log(videoFnDb.videoFile.public_id)
       const videoDelete = await deletefromCloudinary(videoFnDb.videoFile.public_id)
       if(!videoDelete)
       {
         throw new ApiError(401, "Video does not delete")
       }
+      console.log(videoDelete)
       // delete thubmanil
       const deleteThumbnail = await deletefromCloudinary(videoFnDb.thumbnail.public_id)
       if(!deleteThumbnail)
@@ -331,7 +333,7 @@ const deleteVideo = asyncHandler(async (req, res) => {
       }
       
       // update in document
-      const deleteVideoDB = await Video.findByIdAndUpdate(videoId)
+      const deleteVideoDB = await Video.findByIdAndDelete(videoId)
         if(!deleteVideoDB)
         {
             throw new ApiError(401, " not deleted video")

@@ -3,7 +3,7 @@ import mongoose, {Schema} from "mongoose";
 import bcrypt from 'bcrypt'
 import  jwt  from "jsonwebtoken";
 
-console.log(" i am in user model")
+//console.log(" i am in user model")
 const userSchema = new Schema(
     {
         username:{

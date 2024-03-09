@@ -40,7 +40,7 @@ const deletefromCloudinary = async(pathOfCloudinary)=>{
        if(!pathOfCloudinary) return null
       // console.log(pathOfCloudinary)
       const result= await cloudinary.uploader
-      .destroy(pathOfCloudinary)
+      .destroy(pathOfCloudinary,  {resource_type: 'auto'})
 
       // cloudinary.v2.api
       // .delete_resources([pathOfCloudinary], 
